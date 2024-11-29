@@ -1,0 +1,12 @@
+# Node.js
+server/node_modules/
+
+# React
+client/node_modules/
+client/build/
+
+# 환경 변수
+.env
+
+# TypeScript 빌드 출력
+server/dist/
