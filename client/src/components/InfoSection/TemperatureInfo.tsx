@@ -7,17 +7,25 @@ interface TemperatureInfoProps {
 
 const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
   return (
-    <div>
-      <p>
-        <strong>기온:</strong> {data.air}°C
-      </p>
-      <p>
-        <strong>수온:</strong> {data.water}°C
-      </p>
-      <p>
-        <strong>추천왁스:</strong> {data.recommendedWax}
-      </p>
-    </div>
+    <table>
+      <thead>
+
+      </thead>
+      <tbody>
+        <tr>
+          <td>기온</td>
+          <td>{data.air}°C</td>
+        </tr>
+        <tr>
+          <td>수온</td>
+          <td>{data.water}°C</td>
+        </tr>
+        <tr>
+          <td>추천왁스</td>
+          <td>{data.recommendedWax}</td>
+        </tr>
+      </tbody>
+    </table>
   );
 };
 

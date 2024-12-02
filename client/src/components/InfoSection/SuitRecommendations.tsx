@@ -9,16 +9,21 @@ const SuitRecommendations: React.FC<SuitRecommendationsProps> = ({
   recommendations,
 }) => {
   return (
-    <div>
-      <h2>추천 슈트</h2>
-      <ul>
+    <table>
+      <thead>
+        <tr>
+          <th>슈트 추천</th>
+        </tr>
+      </thead>
+      <tbody>
         {recommendations.map((item, index) => (
-          <li key={index}>
-            {item.suitType}: {item.condition}
-          </li>
+          <tr key={index}>
+            <td>{item.suitType}</td>
+            <td>{item.condition}</td>
+          </tr>
         ))}
-      </ul>
-    </div>
+      </tbody>
+    </table>
   );
 };
 
