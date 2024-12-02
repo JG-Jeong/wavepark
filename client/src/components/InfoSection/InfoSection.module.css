@@ -1,44 +1,49 @@
-/* .infoSection {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; 
-    flex: 1; 
-  }
-   */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 10px 0;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-  
-  th {
-    background-color: #f4f4f4;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
+.infoSection {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  .infoSection {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    background-color: #f4f4f4; /* 배경색 추가 */
-    padding: 20px; /* 내부 여백 */
-    border-radius: 10px; /* 모서리 둥글게 */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
-  }
-  
-  .tables {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+.container {
+  display: flex;
+  flex-direction: column; /* 수직 정렬 */
+  gap: 20px; /* 위아래 간격 */
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.temperature {
+  flex: 2;
+  width: 100%; /* 부모 컨테이너 내에서 가득 채우기 */
+  max-width: unset; /* 이전 제한값 제거 */
+  min-width: 0; /* 최소 너비 초기화 */
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.recommendations {
+  flex: 1;
+  width: 100%; /* 부모 컨테이너 내에서 가득 채우기 */
+  max-width: unset; /* 이전 제한값 제거 */
+  min-width: 0; /* 최소 너비 초기화 */
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%; /* 부모 요소의 크기를 가득 채움 */
+  table-layout: auto; /* 자동으로 열 크기 조정 */
+  border-collapse: collapse; /* 테두리 간격 제거 */
+}
+
+th,
+td {
+  padding: 8px; /* 셀 내부 여백 */
+  text-align: left; /* 텍스트 정렬 */
+  border: 1px solid #ddd; /* 테두리 */
+}

@@ -12,7 +12,7 @@ const SuitRecommendations: React.FC<SuitRecommendationsProps> = ({
     <table>
       <thead>
         <tr>
-          <th>슈트 추천</th>
+          <th colSpan={2}>슈트 추천</th>
         </tr>
       </thead>
       <tbody>

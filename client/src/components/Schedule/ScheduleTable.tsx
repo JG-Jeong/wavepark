@@ -11,6 +11,7 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({ schedule }) => {
     <table className={styles.table}>
       <thead>
         <tr>
+          <th>세션</th>
           <th>시간</th>
           <th>세션</th>
         </tr>
@@ -18,8 +19,9 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({ schedule }) => {
       <tbody>
         {schedule.map((item, index) => (
           <tr key={index}>
+            <td>{item.session1}</td>
             <td>{item.time}</td>
-            <td>{item.session}</td>
+            <td>{item.session2}</td>
           </tr>
         ))}
       </tbody>
