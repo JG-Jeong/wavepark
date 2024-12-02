@@ -1,0 +1,47 @@
+.schedule {
+    margin: 20px auto;
+    max-width: 800px;
+    text-align: center;
+    overflow-x: auto;
+    background-color: #f4f4f4; /* 배경색 추가 */
+    padding: 20px; /* 내부 여백 */
+    border-radius: 10px; /* 모서리 둥글게 */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    min-width: 600px; /* 최소 너비 설정 */
+  }
+
+  @media (max-width: 768px) {
+    table {
+      min-width: unset;
+      width: auto; /* 작은 화면에서 표 너비를 조정 */
+    }
+  }
+
+  thead {
+    background-color: #f4f4f4;
+  }
+  
+  th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  h2 {
+    margin-bottom: 15px;
+  }
+  

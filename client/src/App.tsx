@@ -4,6 +4,7 @@ import InfoSection from "./components/InfoSection/InfoSection";
 import Schedule from "./components/Schedule/Schedule";
 import Footer from "./components/Footer/Footer";
 import "./styles/global.css";
+import styles from "./Layout.module.css";
 
 const App: React.FC = () => {
   const temperature = {
@@ -34,11 +35,13 @@ const App: React.FC = () => {
   return (
     <div>
       <Header />
-      <InfoSection
-        temperature={temperature}
-        recommendations={recommendations}
-      />
-      <Schedule schedule={schedule} />
+        <div className={styles.layout}>
+          <InfoSection
+            temperature={temperature}
+            recommendations={recommendations}
+          />
+          <Schedule schedule={schedule} />
+        </div>
       <Footer />
     </div>
   );

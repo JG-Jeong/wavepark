@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./Schedule.module.css";
 import { ScheduleItem } from "../../types";
 
 interface ScheduleTableProps {
@@ -7,7 +8,7 @@ interface ScheduleTableProps {
 
 const ScheduleTable: React.FC<ScheduleTableProps> = ({ schedule }) => {
   return (
-    <table>
+    <table className={styles.table}>
       <thead>
         <tr>
           <th>시간</th>
