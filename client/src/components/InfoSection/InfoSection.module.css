@@ -1,71 +1,11 @@
+.infoSection {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
 .container {
+  min-width: 200px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
   gap: 20px;
 }
-
-.temperature,
-.recommendations {
-  display: flex;
-  width: 400px ;
-  max-width: 100%; /* 최대 폭 제한 */
-  background-color: #ffffff;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-
-table {
-  width: 80%; /* 표의 크기를 내용에 맞게 자동 조정 */
-  margin: 0 auto; /* 표를 수평으로 가운데 정렬 */
-  table-layout: auto; /* 열 크기 자동 조정 */
-  border-collapse: collapse; /* 셀 간격 제거 */
-}
-
-th,
-td {
-  padding: 4px 8px; /* 셀 내부 여백 */
-  text-align: center; /* 텍스트 가운데 정렬 */
-  border: 1px solid #ddd; /* 셀 테두리 */
-  width: 200px;
-}
-
-th {
-  background-color: #f4f4f4; /* 헤더 배경색 */
-  font-weight: bold; /* 글씨 강조 */
-}
-
-tr:nth-child(even) {
-  background-color: #f9f9f9; /* 짝수 행 배경색 */
-}
-
-tr:hover {
-  background-color: #f1f1f1; /* 행에 마우스 올릴 때 배경 강조 */
-}
-
-@media (max-width: 768px) {
-  table {
-    width: 100%; /* 작은 화면에서는 전체 너비 사용 */
-    overflow-x: auto; /* 가로 스크롤 가능 */
-  }
-
-  th,
-  td {
-    font-size: 0.9rem; /* 작은 화면에서 글씨 크기 조정 */
-    padding: 3px; /* 셀 여백 줄이기 */
-  }
-
-  .container {
-    flex-direction: column; /* 세로로 정렬 */
-    gap: 20px;
-  }
-
-  .temperature,
-  .recommendations {
-    max-width: 100%; /* 너비를 전체로 확장 */
-  }
-}
-

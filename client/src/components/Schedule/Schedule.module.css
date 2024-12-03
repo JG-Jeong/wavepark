@@ -1,45 +1,46 @@
 .schedule {
-  display: flex; /* Flexbox 활성화 */
-  flex-direction: column; /* 세로 정렬 */
-  justify-content: center; /* 세로 중앙 정렬 */
-  align-items: center; /* 가로 중앙 정렬 */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin: 20px auto;
   max-width: 800px;
-  overflow-x: auto;
-  background-color: #f4f4f4; /* 배경색 */
+  background-color: #f4f4f4;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-  min-width: 600px; /* 표가 너무 좁아지지 않도록 최소 너비 설정 */
+.header {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background-color: #ddd;
+  font-weight: bold;
+  border-radius: 5px;
 }
 
-@media (max-width: 768px) {
-  table {
-    min-width: unset; /* 최소 너비 해제 */
-    width: auto; /* 작은 화면에서 가로 스크롤 허용 */
-  }
-}
-
-th, td {
+.row {
+  display: flex;
+  justify-content: space-between;
   padding: 10px;
   border: 1px solid #ddd;
-  text-align: center;
+  border-radius: 5px;
+  background-color: #fff;
 }
 
-tr:nth-child(even) {
+.row:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-tr:hover {
-  background-color: #f1f1f1;
+.cell {
+  flex: 1; /* 모든 셀이 동일한 크기 */
+  text-align: center;
+  padding: 5px;
+  white-space: nowrap; /* 줄 바꿈 방지 */
+  overflow: hidden; /* 넘치는 텍스트 숨김 */
+  text-overflow: ellipsis; /* 넘치는 텍스트에 ... 표시 */
 }
 
-h2 {
-  margin-bottom: 15px;
+.row:hover {
+  background-color: #f1f1f1;
 }

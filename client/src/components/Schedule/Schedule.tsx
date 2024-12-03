@@ -10,7 +10,7 @@ interface ScheduleProps {
 const Schedule: React.FC<ScheduleProps> = ({ schedule }) => {
   return (
     <div className={styles.schedule}>
-      <h2>운영 일정</h2>
+      <h2 className={styles.header}>운영 일정</h2>
       <ScheduleTable schedule={schedule} />
     </div>
   );

@@ -16,12 +16,8 @@ const InfoSection: React.FC<InfoSectionProps> = ({
   return (
     <div className={styles.infoSection}>
       <div className={styles.container}>
-        <div className={styles.temperature}>
-          <TemperatureInfo data={temperature} />
-        </div>
-        <div className={styles.recommendations}>
-          <SuitRecommendations recommendations={recommendations} />
-        </div>
+        <TemperatureInfo data={temperature} />
+        <SuitRecommendations recommendations={recommendations} />
       </div>
     </div>
   );
