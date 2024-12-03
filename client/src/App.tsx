@@ -30,7 +30,7 @@ const App: React.FC = () => {
     {
       session1: "리프레벨업 (예약 필요!)",
       time: "11:00 ~ 12:00",
-      session2: "리프레벨업 (예약 필요!)",
+      session2: "초급세션 (M1, M2)",
     },
     {
       session1: "중급세션 (M3, M4)",
@@ -40,7 +40,7 @@ const App: React.FC = () => {
     {
       session1: "초급세션 (M1, M2)",
       time: "13:00 ~ 14:00",
-      session2: "초급세션 (M1, M2)",
+      session2: "리프레벨업 (예약 필요!)",
     },
     {
       session1: "중급세션 (M2, M3, M4)",

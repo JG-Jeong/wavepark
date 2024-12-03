@@ -20,3 +20,29 @@
     color: #555; /* 날짜 텍스트 색상 */
   }
   
+  .logo {
+    position: absolute; /* 텍스트 뒤로 배치 */
+    top: 50%; /* 텍스트와 날짜 중심에 배치 */
+    left: 50%; /* 가로 중앙 정렬 */
+    transform: translate(-50%, -50%); /* 완전한 중앙 정렬 */
+    width: 80%; /* 로고 크기 (반응형 조정) */
+    height: auto; /* 비율 유지 */
+    opacity: 0.25; /* 로고를 흐릿하게 설정 */
+    z-index: 1; /* 로고가 텍스트 뒤에 배치되도록 설정 */
+    pointer-events: none; /* 로고가 클릭되지 않도록 설정 */
+  }
+  .date {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  @media (max-width: 768px) {
+    .title {
+      font-size: 1.2rem; /* 작은 화면에서 제목 크기 조정 */
+    }
+  
+    .logo {
+      width: 100%; /* 작은 화면에서 로고 크기 조정 */
+    }
+  }

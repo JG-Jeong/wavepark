@@ -1,47 +1,45 @@
 .schedule {
-    margin: 20px auto;
-    max-width: 800px;
-    text-align: center;
-    overflow-x: auto;
-    background-color: #f4f4f4; /* 배경색 추가 */
-    padding: 20px; /* 내부 여백 */
-    border-radius: 10px; /* 모서리 둥글게 */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
-  }
-  
+  display: flex; /* Flexbox 활성화 */
+  flex-direction: column; /* 세로 정렬 */
+  justify-content: center; /* 세로 중앙 정렬 */
+  align-items: center; /* 가로 중앙 정렬 */
+  margin: 20px auto;
+  max-width: 800px;
+  overflow-x: auto;
+  background-color: #f4f4f4; /* 배경색 */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  min-width: 600px; /* 표가 너무 좁아지지 않도록 최소 너비 설정 */
+}
+
+@media (max-width: 768px) {
   table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    min-width: 600px; /* 최소 너비 설정 */
+    min-width: unset; /* 최소 너비 해제 */
+    width: auto; /* 작은 화면에서 가로 스크롤 허용 */
   }
+}
 
-  @media (max-width: 768px) {
-    table {
-      min-width: unset;
-      width: auto; /* 작은 화면에서 표 너비를 조정 */
-    }
-  }
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
 
-  thead {
-    background-color: #f4f4f4;
-  }
-  
-  th, td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: center;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  h2 {
-    margin-bottom: 15px;
-  }
-  
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+h2 {
+  margin-bottom: 15px;
+}
