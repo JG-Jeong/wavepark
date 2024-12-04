@@ -8,24 +8,32 @@ interface ScheduleTableProps {
 
 const ScheduleTable: React.FC<ScheduleTableProps> = ({ schedule }) => {
   return (
-    <table className={styles.table}>
-      <thead>
-        <tr>
-          <th>세션</th>
-          <th>시간</th>
-          <th>세션</th>
-        </tr>
-      </thead>
-      <tbody>
-        {schedule.map((item, index) => (
-          <tr key={index}>
-            <td>{item.session1}</td>
-            <td>{item.time}</td>
-            <td>{item.session2}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div className={styles.schedule}>
+      {/* 헤더 */}
+      <div className={styles.header}>
+        <div className={styles.cell}>세션 1</div>
+        <div className={styles.cell}>시간</div>
+        <div className={styles.cell}>세션 2</div>
+      </div>
+      {/* 데이터 렌더링 */}
+      {schedule.map((item, index) => (
+        <div key={index} className={styles.row}>
+          <div className={styles.cell}>
+            <div>{item.session1.title}</div>
+            <div style={{ fontSize: "smaller", color: "gray" }}>
+              {item.session1.subtitle}
+            </div>
+          </div>
+          <div className={styles.cell}>{item.time}</div>
+          <div className={styles.cell}>
+            <div>{item.session2.title}</div>
+            <div style={{ fontSize: "smaller", color: "gray" }}>
+              {item.session2.subtitle}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };
 

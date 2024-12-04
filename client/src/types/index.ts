@@ -10,7 +10,7 @@ export interface SuitRecommendation {
 }
 
 export interface ScheduleItem {
-  session1: string;
+  session1: { title: string; subtitle: string };
   time: string;
-  session2: string;
+  session2: { title: string; subtitle: string };
 }

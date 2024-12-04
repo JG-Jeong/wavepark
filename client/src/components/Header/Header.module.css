@@ -1,48 +1,92 @@
 .header {
-    display: flex;
-    flex-direction: column; /* 기본 세로 정렬 */
-    align-items: center; /* 기본적으로 가로 정렬은 가운데 */
-    justify-content: space-between; /* 요소 간 공간 분배 */
-    text-align: center; /* 텍스트 가운데 정렬 */
-    height: 100px; /* 헤더 높이 */
-    padding: 20px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
-    position: relative; /* 날짜를 별도로 배치하기 위해 */
-  }
-  
-  .date {
-    position: absolute; /* 날짜를 헤더 오른쪽 상단으로 고정 */
-    top: auto; 
-    bottom: 20px;
-    right: 20px; /* 오른쪽 여백 */
-    text-align: right; /* 텍스트 우측 정렬 */
-    font-size: 0.9rem; /* 날짜 폰트 크기 조정 */
-    color: #555; /* 날짜 텍스트 색상 */
-  }
-  
+  display: flex;
+  flex-direction: column; /* 기본 세로 정렬 */
+  align-items: center; /* 기본적으로 가로 정렬은 가운데 */
+  justify-content: space-between; /* 요소 간 공간 분배 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+  height: 70px; /* 헤더 높이 */
+  padding: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
+  position: relative; /* 날짜를 별도로 배치하기 위해 */
+  gap: 10px; /* 요소 간 간격 */
+}
+
+.contentWrapper {
+  position: relative; /* 자식 요소의 기준점 */
+  width: 100%; /* 전체 넓이 차지 */
+  height: 100%; /* 부모 높이 차지 */
+}
+
+.title {
+  position: absolute; /* 겹치도록 설정 */
+  top: 50%; /* 수직 중앙 */
+  left: 50%; /* 수평 중앙 */
+  transform: translate(-50%, -50%); /* 완전 중앙 정렬 */
+  font-size: 2rem; /* 제목 크기 */
+  z-index: 2; /* 로고 위에 표시 */
+  color: #000; /* 텍스트 색상 */
+}
+
+.date {
+  position: absolute; /* 날짜를 헤더 오른쪽 상단으로 고정 */
+  top: auto;
+  bottom: 20px;
+  right: 20px; /* 오른쪽 여백 */
+  text-align: right; /* 텍스트 우측 정렬 */
+  font-size: 0.9rem; /* 날짜 폰트 크기 조정 */
+  color: #555; /* 날짜 텍스트 색상 */
+}
+
+.logo {
+  position: absolute; /* 겹치도록 설정 */
+  top: 50%; /* 수직 중앙 */
+  left: 50%; /* 수평 중앙 */
+  transform: translate(-50%, -50%); /* 완전 중앙 정렬 */
+  width: 60%; /* 기본 크기 */
+  height: auto;
+  max-height: 200px;
+  opacity: 0.25; /* 로고 투명도 */
+  z-index: 1; /* 텍스트 아래에 표시 */
+  pointer-events: none; /* 클릭 방지 */
+}
+
+.date {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* 작은 화면 크기 */
+@media (max-width: 480px) {
   .logo {
-    position: absolute; /* 텍스트 뒤로 배치 */
-    top: 50%; /* 텍스트와 날짜 중심에 배치 */
-    left: 50%; /* 가로 중앙 정렬 */
-    transform: translate(-50%, -50%); /* 완전한 중앙 정렬 */
-    width: 80%; /* 로고 크기 (반응형 조정) */
-    height: auto; /* 비율 유지 */
-    opacity: 0.25; /* 로고를 흐릿하게 설정 */
-    z-index: 1; /* 로고가 텍스트 뒤에 배치되도록 설정 */
-    pointer-events: none; /* 로고가 클릭되지 않도록 설정 */
+    width: 40%; /* 너비 조정 */
+    max-height: 100px; /* 최대 높이 조정 */
   }
-  .date {
-    margin-top: 10px;
-    font-size: 0.9rem;
-    color: #555;
+}
+/* 중간 화면 크기 */
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.7rem; /* 작은 화면에서 제목 크기 조정 */
   }
 
-  @media (max-width: 768px) {
-    .title {
-      font-size: 1.2rem; /* 작은 화면에서 제목 크기 조정 */
-    }
-  
-    .logo {
-      width: 100%; /* 작은 화면에서 로고 크기 조정 */
-    }
+  .logo {
+    width: 70%;
+    max-height: 150px;
   }
+}
+
+/* 화면이 768px 이상일 경우 */
+@media (min-width: 769px) {
+  .logo {
+    max-height: 180px; /* 최대 크기를 제한 */
+    width: 50%; /* 더 큰 화면에서도 크기 제한 */
+  }
+}
+
+/* 화면이 매우 큰 경우 */
+@media (min-width: 1200px) {
+  .logo {
+    max-height: 150px; /* 매우 큰 화면에서 크기를 더 제한 */
+    width: 40%; /* 적절한 비율 유지 */
+  }
+}
