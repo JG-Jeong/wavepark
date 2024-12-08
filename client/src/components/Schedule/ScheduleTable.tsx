@@ -11,9 +11,9 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({ schedule }) => {
     <div className={styles.schedule}>
       {/* 헤더 */}
       <div className={styles.header}>
-        <div className={styles.cell}>좌코브</div>
+        <div className={styles.cell}>세션 1</div>
         <div className={styles.cell}>시간</div>
-        <div className={styles.cell}>우코브</div>
+        <div className={styles.cell}>세션 2</div>
       </div>
       {/* 데이터 렌더링 */}
       {schedule.map((item, index) => (
@@ -24,7 +24,10 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({ schedule }) => {
               {item.session1.subtitle}
             </div>
           </div>
-          <div className={styles.cell}>{item.time}</div>
+          <div className={styles.cell}>
+            <div>{item.time.split("~")[0]} ~</div>
+            <div>{item.time.split("~")[1]}</div>
+          </div>
           <div className={styles.cell}>
             <div>{item.session2.title}</div>
             <div style={{ fontSize: "smaller", color: "gray" }}>
