@@ -24,7 +24,10 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({ schedule }) => {
               {item.session1.subtitle}
             </div>
           </div>
-          <div className={styles.cell}>{item.time}</div>
+          <div className={styles.cell}>
+            <div>{item.time.split("~")[0]} ~</div>
+            <div>{item.time.split("~")[1]}</div>
+          </div>
           <div className={styles.cell}>
             <div>{item.session2.title}</div>
             <div style={{ fontSize: "smaller", color: "gray" }}>

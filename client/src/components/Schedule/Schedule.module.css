@@ -5,7 +5,7 @@
   margin: 1px auto;
   max-width: 800px;
   background-color: #f4f4f4;
-  padding: 20px;
+  padding: 5px;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -39,6 +39,11 @@
   white-space: nowrap; /* 줄 바꿈 방지 */
   overflow: hidden; /* 넘치는 텍스트 숨김 */
   text-overflow: ellipsis; /* 넘치는 텍스트에 ... 표시 */
+}
+
+.cell div {
+  white-space: normal; /* 줄바꿈 허용 */
+  line-height: 1.5; /* 줄 간격 조정 */
 }
 
 .row:hover {

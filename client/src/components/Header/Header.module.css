@@ -22,7 +22,7 @@
   top: 50%; /* 수직 중앙 */
   left: 50%; /* 수평 중앙 */
   transform: translate(-50%, -50%); /* 완전 중앙 정렬 */
-  font-size: 2rem; /* 제목 크기 */
+  font-size: 1.5rem; /* 제목 크기 */
   z-index: 2; /* 로고 위에 표시 */
   color: #000; /* 텍스트 색상 */
 }
