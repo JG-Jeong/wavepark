@@ -19,33 +19,37 @@
   border-radius: 5px;
 }
 
-.row {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #fff;
-}
 
-.row:nth-child(even) {
-  background-color: #f9f9f9;
-}
+  thead {
+    background-color: #f4f4f4;
+  }
+  
+  th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  th {
+    font-weight: bold;
+    background-color: #e9ecef;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tr:hover td {
+    background-color: #f1f1f1;
+  }
+  
+  tr:hover td[style*="background-color"] {
+    filter: brightness(0.95);
+  }
+  
+  h2 {
+    margin-bottom: 15px;
+    color: #333;
+  }
 
-.cell {
-  flex: 1; /* 모든 셀이 동일한 크기 */
-  text-align: center;
-  padding: 5px;
-  white-space: nowrap; /* 줄 바꿈 방지 */
-  overflow: hidden; /* 넘치는 텍스트 숨김 */
-  text-overflow: ellipsis; /* 넘치는 텍스트에 ... 표시 */
-}
-
-.cell div {
-  white-space: normal; /* 줄바꿈 허용 */
-  line-height: 1.5; /* 줄 간격 조정 */
-}
-
-.row:hover {
-  background-color: #f1f1f1;
-}

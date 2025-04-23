@@ -8,20 +8,24 @@ interface TemperatureInfoProps {
 
 const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
   return (
-    <div className={styles.temperatureInfo}>
-      <div className={styles.row}>
-        <div className={styles.label}>기온</div>
-        <div className={styles.value}>{data.air}°C</div>
-      </div>
-      <div className={styles.row}>
-        <div className={styles.label}>수온</div>
-        <div className={styles.value}>{data.water}°C</div>
-      </div>
-      <div className={styles.row}>
-        <div className={styles.label}>추천왁스</div>
-        <div className={styles.value}>{data.recommendedWax}</div>
-      </div>
-    </div>
+
+    <table>
+      <tbody>
+        <tr>
+          <td>기온</td>
+          <td>{data.air}°C</td>
+        </tr>
+        <tr>
+          <td>수온</td>
+          <td>{data.water}°C</td>
+        </tr>
+        <tr>
+          <td>추천왁스</td>
+          <td>{data.recommendedWax}</td>
+        </tr>
+      </tbody>
+    </table>
+
   );
 };
 
