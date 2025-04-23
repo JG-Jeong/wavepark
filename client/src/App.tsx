@@ -22,6 +22,7 @@ const App: React.FC = () => {
   ];
 
   const schedule = [
+
     { session1: "상급세션 (M4, T1)",time: "10:00 ~ 11:00", session2: "상급세션 (M4, T1)" },
     { session1: "Lv.4 라인업레슨",time: "11:00 ~ 12:00", session2: "초급세션 (M1, M2)" },
     { session1: "중급세션 (M3, M4)",time: "12:00 ~ 13:00", session2: "중급세션 (M3, M4)" },
@@ -35,6 +36,7 @@ const App: React.FC = () => {
   return (
     <div>
       <Header />
+      <div className={styles.box}>
         <div className={styles.layout}>
           <InfoSection
             temperature={temperature}
@@ -42,6 +44,7 @@ const App: React.FC = () => {
           />
           <Schedule schedule={schedule} />
         </div>
+      </div>
       <Footer />
     </div>
   );

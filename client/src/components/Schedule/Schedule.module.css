@@ -1,27 +1,24 @@
 .schedule {
-    margin: 20px auto;
-    max-width: 800px;
-    text-align: center;
-    overflow-x: auto;
-    background-color: #f4f4f4; /* 배경색 추가 */
-    padding: 20px; /* 내부 여백 */
-    border-radius: 10px; /* 모서리 둥글게 */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    min-width: 600px; /* 최소 너비 설정 */
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 1px auto;
+  max-width: 800px;
+  background-color: #f4f4f4;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  @media (max-width: 768px) {
-    table {
-      min-width: unset;
-      width: auto; /* 작은 화면에서 표 너비를 조정 */
-    }
-  }
+.header {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background-color: #ddd;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
 
   thead {
     background-color: #f4f4f4;
@@ -55,4 +52,4 @@
     margin-bottom: 15px;
     color: #333;
   }
-  
+
