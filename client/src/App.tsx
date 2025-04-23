@@ -22,14 +22,14 @@ const App: React.FC = () => {
   ];
 
   const schedule = [
-    { time: "10:00 ~ 11:00", session: "상급세션 (M4, T1)" },
-    { time: "11:00 ~ 12:00", session: "리프레벨업 (예약 필요!)" },
-    { time: "12:00 ~ 13:00", session: "중급세션 (M3, M4)" },
-    { time: "13:00 ~ 14:00", session: "초급세션 (M1, M2)" },
-    { time: "14:00 ~ 15:00", session: "중급세션 (M2, M3, M4)" },
-    { time: "15:00 ~ 16:00", session: "초급세션 (M2, M3)" },
-    { time: "16:00 ~ 17:00", session: "중급세션 (M4)" },
-    { time: "17:00 ~ 18:00", session: "상급세션 (T1, T2)" },
+    { session1: "상급세션 (M4, T1)",time: "10:00 ~ 11:00", session2: "상급세션 (M4, T1)" },
+    { session1: "Lv.4 라인업레슨",time: "11:00 ~ 12:00", session2: "초급세션 (M1, M2)" },
+    { session1: "중급세션 (M3, M4)",time: "12:00 ~ 13:00", session2: "중급세션 (M3, M4)" },
+    { session1: "Lv.5 턴기초레슨",time: "13:00 ~ 14:00", session2: "초급세션 (M1, M2)" },
+    { session1: "상급세션 (M4)",time: "14:00 ~ 15:00", session2: "상급세션 (M4)" },
+    { session1: "초급세션 (M2, M3)",time: "15:00 ~ 16:00", session2: "초급세션 (M2, M3)" },
+    { session1: "상급세션 (T1 T2)",time: "16:00 ~ 17:00", session2: "상급세션 (T1 T2)" },
+    { session1: "중급세션 (M2, M3, M4)",time: "17:00 ~ 18:00", session2: "중급세션 (M2, M3, M4)" },
   ];
 
   return (

@@ -8,9 +8,6 @@ interface TemperatureInfoProps {
 const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
   return (
     <table>
-      <thead>
-
-      </thead>
       <tbody>
         <tr>
           <td>기온</td>
