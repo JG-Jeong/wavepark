@@ -1,17 +1,39 @@
+.layout {
+  display: flex;
+  flex-direction: column; /* 기본적으로 세로 배치 */
+  align-items: center; /* 가운데 정렬 */
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  max-width: 1200px; /* 최대 너비 제한 */
+  margin: 0 auto; /* 가운데 정렬 */
+}
+
+.infoSection {
+  width: 100%;
+  max-width: 100%;
+}
+
+.schedule {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* 웹 화면에서의 레이아웃 */
+@media (min-width: 768px) {
   .layout {
-    display: flex; /* 좌우 배치를 위한 Flexbox 사용 */
-    justify-content: space-between; /* 좌우 섹션에 공간 분배 */
-    gap: 20px; /* 섹션 간의 간격 */
-    padding: 20px; /* 전체적인 여백 */
-    box-sizing: border-box; /* 패딩 포함 크기 계산 */
+    flex-direction: row; /* 가로 배치 */
+    justify-content: center; /* 가운데 정렬 */
   }
-  
+
   .infoSection {
-    flex: 1; /* InfoSection이 일정 크기를 가지도록 설정 */
-    max-width: 45%; /* 최대 폭 제한 */
+    flex: 1;
+    max-width: 45%;
   }
-  
+
   .schedule {
-    flex: 1; /* Schedule도 일정 크기를 가지도록 설정 */
-    max-width: 45%; /* 최대 폭 제한 */
+    flex: 1;
+    max-width: 45%;
   }
+}
+
