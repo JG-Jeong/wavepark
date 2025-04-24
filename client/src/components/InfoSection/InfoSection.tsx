@@ -15,7 +15,7 @@ const InfoSection: React.FC<InfoSectionProps> = ({
 }) => {
   return (
     <div className={styles.infoSection}>
-      <div className={styles.tables}>
+      <div className={styles.container}>
         <TemperatureInfo data={temperature} />
         <SuitRecommendations recommendations={recommendations} />
       </div>

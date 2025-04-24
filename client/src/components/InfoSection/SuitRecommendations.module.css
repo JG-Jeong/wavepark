@@ -1,0 +1,39 @@
+.suitRecommendations {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.header {
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #ddd;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.cell {
+  flex: 1;
+  text-align: center;
+  white-space: nowrap; /* 줄 바꿈 방지 */
+  overflow: hidden; /* 공간 부족 시 넘치는 텍스트 숨기기 */
+  text-overflow: ellipsis; /* 넘치는 텍스트에 '...' 표시 */
+}
+
+@media (max-width: 600px) {
+  .container {
+    min-width: 200px;
+    min-height: 200px;
+  }
+}

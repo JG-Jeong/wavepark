@@ -43,6 +43,7 @@ const App: React.FC = () => {
   return (
     <div>
       <Header />
+      <div className={styles.box}>
         <div className={styles.layout}>
           <InfoSection
             temperature={temperature}
@@ -50,6 +51,7 @@ const App: React.FC = () => {
           />
           <Schedule schedule={schedule} />
         </div>
+      </div>
       <Footer />
     </div>
   );

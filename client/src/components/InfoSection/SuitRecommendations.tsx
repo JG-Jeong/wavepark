@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./SuitRecommendations.module.css";
 import { SuitRecommendation } from "../../types";
 import styles from "./InfoSection.module.css";
 
@@ -16,6 +17,7 @@ const SuitRecommendations: React.FC<SuitRecommendationsProps> = ({
   };
 
   return (
+<<<<<<< HEAD
     <div className={styles.suitContainer}>
       <table className={styles.suitTable}>
         <thead>
@@ -32,6 +34,16 @@ const SuitRecommendations: React.FC<SuitRecommendationsProps> = ({
           ))}
         </tbody>
       </table>
+=======
+    <div className={styles.suitRecommendations}>
+      <div className={styles.header}>슈트 추천</div>
+      {recommendations.map((item, index) => (
+        <div key={index} className={styles.row}>
+          <div className={styles.cell}>{item.suitType}</div>
+          <div className={styles.cell}>{item.condition}</div>
+        </div>
+      ))}
+>>>>>>> e3c9f503eb226f391f8c15a87320df2709ca8fca
     </div>
   );
 };

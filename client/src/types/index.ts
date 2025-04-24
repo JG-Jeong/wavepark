@@ -17,4 +17,5 @@ export interface ScheduleItem {
 
 export interface Schedule {
   schedule: ScheduleItem[];
+
 }

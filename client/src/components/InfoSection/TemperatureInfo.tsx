@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./TemperatureInfo.module.css";
 import { Temperature } from "../../types";
 
 interface TemperatureInfoProps {
@@ -7,6 +8,7 @@ interface TemperatureInfoProps {
 
 const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
   return (
+
     <table>
       <tbody>
         <tr>
@@ -23,6 +25,7 @@ const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
         </tr>
       </tbody>
     </table>
+
   );
 };
 
