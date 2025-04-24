@@ -1,4 +1,44 @@
 .layout {
+<<<<<<< HEAD
+  display: flex;
+  flex-direction: column; /* 기본적으로 세로 배치 */
+  align-items: center; /* 가운데 정렬 */
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  max-width: 1200px; /* 최대 너비 제한 */
+  margin: 0 auto; /* 가운데 정렬 */
+}
+
+.infoSection {
+  width: 100%;
+  max-width: 100%;
+}
+
+.schedule {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* 웹 화면에서의 레이아웃 */
+@media (min-width: 768px) {
+  .layout {
+    flex-direction: row; /* 가로 배치 */
+    justify-content: center; /* 가운데 정렬 */
+  }
+
+  .infoSection {
+    flex: 1;
+    max-width: 45%;
+  }
+
+  .schedule {
+    flex: 1;
+    max-width: 45%;
+  }
+}
+
+=======
   display: flex; /* 좌우 배치를 위한 Flexbox 사용 */
   justify-content: space-between; /* 좌우 섹션에 공간 분배 */
   gap: 20px; /* 섹션 간의 간격 */
@@ -23,3 +63,4 @@
   border-radius: 10px; /* 모서리 둥글게 */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
 }
+>>>>>>> e3c9f503eb226f391f8c15a87320df2709ca8fca

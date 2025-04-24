@@ -6,11 +6,12 @@ interface ScheduleTableProps {
   schedule: ScheduleItem[];
 }
 
-const getSessionColor = (session: string): string => {
-  if (session.includes("상급세션")) return "#ff6b6b"; // 빨간색
-  if (session.includes("중급세션")) return "#4dabf7"; // 파란색
-  if (session.includes("초급세션")) return "#ffa94d"; // 주황색
-  return "transparent";
+const getSessionClass = (session: string) => {
+  if (session.includes("상급세션")) return styles.advancedSession;
+  if (session.includes("중급세션")) return styles.intermediateSession;
+  if (session.includes("초급세션")) return styles.beginnerSession;
+  if (session.includes("Lv.4 라인업레슨") || session.includes("Lv.5 턴기초레슨")) return styles.lineupLesson;
+  return "";
 };
 
 const ScheduleTable: React.FC<ScheduleTableProps> = ({ schedule }) => {
@@ -24,22 +25,13 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({ schedule }) => {
         </tr>
       </thead>
       <tbody>
-        {schedule.map((item, index) => {
-          // 각 행에 대해 동일한 색상을 적용하기 위해 하나의 색상만 결정
-          const rowColor = getSessionColor(item.session1);
-          
-          return (
-            <tr key={index}>
-              <td style={{ backgroundColor: rowColor }}>
-                {item.session1}
-              </td>
-              <td>{item.time}</td>
-              <td style={{ backgroundColor: rowColor }}>
-                {item.session2}
-              </td>
-            </tr>
-          );
-        })}
+        {schedule.map((item, index) => (
+          <tr key={index}>
+            <td className={getSessionClass(item.session1)} dangerouslySetInnerHTML={{ __html: item.session1 }} />
+            <td>{item.time}</td>
+            <td className={getSessionClass(item.session2)} dangerouslySetInnerHTML={{ __html: item.session2 }} />
+          </tr>
+        ))}
       </tbody>
     </table>
   );
