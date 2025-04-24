@@ -1,22 +1,18 @@
 .infoSection {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  background-color: #f4f4f4;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  margin: 0 auto;
+  flex: 1;
+  min-width: 10px;
+  max-width: 15%;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .tables {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 8px;
   width: 100%;
-  max-width: 300px;
 }
 
 .suitContainer {
@@ -26,15 +22,16 @@
 }
 
 table {
-  width: auto;
+  width: 100%;
   border-collapse: collapse;
-  margin: 10px 0;
+  margin: 5px 0;
   table-layout: fixed;
+  font-size: 0.85em;
 }
 
 th, td {
-  border: 2px solid #ddd;
-  padding: 4px 6px;
+  border: 1px solid #ddd;
+  padding: 2px 3px;
   text-align: center;
   font-weight: bold;
   white-space: nowrap;
@@ -81,20 +78,27 @@ tr:nth-child(even) {
 
 @media (max-width: 768px) {
   .infoSection {
-    padding: 10px;
-    max-width: 350px;
-  }
-
-  .tables {
-    gap: 10px;
-    max-width: 250px;
-  }
-
-  table {
-    font-size: 14px;
+    padding: 6px;
+    min-width: 180px;
   }
 
   th, td {
-    padding: 3px 4px;
+    padding: 2px 2px;
+    font-size: 0.75em;
   }
+}
+
+.denied {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.allowed {
+  color: #0d6efd;
+  font-weight: bold;
+}
+
+.conditional {
+  color: #ffc107;
+  font-weight: bold;
 }

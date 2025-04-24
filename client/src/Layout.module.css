@@ -1,39 +1,31 @@
 .layout {
   display: flex;
-  flex-direction: column; /* 기본적으로 세로 배치 */
-  align-items: center; /* 가운데 정렬 */
+  flex-direction: row;
+  align-items: flex-start;
   gap: 20px;
   padding: 20px;
   box-sizing: border-box;
-  max-width: 1200px; /* 최대 너비 제한 */
-  margin: 0 auto; /* 가운데 정렬 */
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .infoSection {
-  width: 100%;
-  max-width: 100%;
+  flex: 1;
+  min-width: 300px;
 }
 
 .schedule {
-  width: 100%;
-  max-width: 100%;
+  flex: 1;
+  min-width: 300px;
 }
 
 /* 웹 화면에서의 레이아웃 */
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .layout {
-    flex-direction: row; /* 가로 배치 */
-    justify-content: center; /* 가운데 정렬 */
-  }
-
-  .infoSection {
-    flex: 1;
-    max-width: 45%;
-  }
-
-  .schedule {
-    flex: 1;
-    max-width: 45%;
+    padding: 10px;
+    gap: 10px;
   }
 }
 

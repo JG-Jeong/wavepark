@@ -13,6 +13,19 @@ const InfoSection: React.FC<InfoSectionProps> = ({
   temperature,
   recommendations,
 }) => {
+  const getConditionClass = (condition: string) => {
+    switch (condition) {
+      case '불허':
+        return styles.denied;
+      case '출격':
+        return styles.allowed;
+      case '조건부허용':
+        return styles.conditional;
+      default:
+        return '';
+    }
+  };
+
   return (
     <div className={styles.infoSection}>
       <div className={styles.tables}>
