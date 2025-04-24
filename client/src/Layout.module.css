@@ -2,21 +2,26 @@
   display: flex;
   flex-direction: column; /* 기본적으로 세로 배치 */
   align-items: center; /* 가운데 정렬 */
-  gap: 20px;
-  padding: 20px;
+  gap: 5px; /* 10px에서 5px로 줄임 */
+  padding: 5px; /* 10px에서 5px로 줄임 */
   box-sizing: border-box;
   max-width: 1200px; /* 최대 너비 제한 */
   margin: 0 auto; /* 가운데 정렬 */
+  min-height: calc(100vh - 100px); /* 120px에서 100px로 줄임 */
+  height: calc(100vh - 100px); /* 고정 높이 추가 */
+  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 */
 }
 
 .infoSection {
   width: 100%;
   max-width: 100%;
+  flex: 1; /* 남은 공간을 채우도록 설정 */
 }
 
 .schedule {
   width: 100%;
   max-width: 100%;
+  flex: 1; /* 남은 공간을 채우도록 설정 */
 }
 
 /* 웹 화면에서의 레이아웃 */
@@ -24,6 +29,9 @@
   .layout {
     flex-direction: row; /* 가로 배치 */
     justify-content: center; /* 가운데 정렬 */
+    gap: 20px;
+    padding: 20px;
+    height: auto; /* 데스크톱에서는 자동 높이 */
   }
 
   .infoSection {

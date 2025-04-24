@@ -4,8 +4,8 @@
     align-items: center; /* 기본적으로 가로 정렬은 가운데 */
     justify-content: space-between; /* 요소 간 공간 분배 */
     text-align: center; /* 텍스트 가운데 정렬 */
-    height: 100px; /* 헤더 높이 */
-    padding: 20px;
+    height: 80px; /* 100px에서 80px로 줄임 */
+    padding: 10px; /* 20px에서 10px로 줄임 */
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
     position: relative; /* 날짜를 별도로 배치하기 위해 */
   }
@@ -13,10 +13,10 @@
   .date {
     position: absolute; /* 날짜를 헤더 오른쪽 상단으로 고정 */
     top: auto; 
-    bottom: 20px;
-    right: 20px; /* 오른쪽 여백 */
+    bottom: 10px; /* 20px에서 10px로 줄임 */
+    right: 10px; /* 20px에서 10px로 줄임 */
     text-align: right; /* 텍스트 우측 정렬 */
-    font-size: 0.9rem; /* 날짜 폰트 크기 조정 */
+    font-size: 0.8rem; /* 0.9rem에서 0.8rem으로 줄임 */
     color: #555; /* 날짜 텍스트 색상 */
   }
   
