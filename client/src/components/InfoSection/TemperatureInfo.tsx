@@ -10,6 +10,10 @@ const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
     <table>
       <tbody>
         <tr>
+          <td>날씨</td>
+          <td>{data.weather}</td>
+        </tr>
+        <tr>
           <td>기온</td>
           <td>{data.air}°C</td>
         </tr>
