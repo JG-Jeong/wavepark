@@ -4,8 +4,9 @@
   max-width: 15%;
   background-color: #f5f5f5;
   border-radius: 8px;
-  padding: 8px;
+  padding: 6px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
 }
 
 .tables {
@@ -69,8 +70,8 @@ tr:nth-child(even) {
 .suitRecommendations {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 15px;
+  gap: 8px;
+  padding: 10px;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
