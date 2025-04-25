@@ -34,14 +34,14 @@ const App: React.FC = () => {
   };
 
   const schedule = [
-    { session1: formatSession("상급세션 (M4, T1)"), time: "10:00\n11:00", session2: formatSession("상급세션 (M4, T1)") },
-    { session1: formatSession("Lv.4 라인업레슨"), time: "11:00\n12:00", session2: formatSession("초급세션 (M1, M2)") },
-    { session1: formatSession("중급세션 (M3, M4)"), time: "12:00\n13:00", session2: formatSession("중급세션 (M3, M4)") },
-    { session1: formatSession("Lv.5 턴기초레슨"), time: "13:00\n14:00", session2: formatSession("초급세션 (M1, M2)") },
-    { session1: formatSession("상급세션 (M4)"), time: "14:00\n15:00", session2: formatSession("상급세션 (M4)") },
-    { session1: formatSession("초급세션 (M2, M3)"), time: "15:00\n16:00", session2: formatSession("초급세션 (M2, M3)") },
-    { session1: formatSession("상급세션 (T1 T2)"), time: "16:00\n17:00", session2: formatSession("상급세션 (T1 T2)") },
-    { session1: formatSession("중급세션 (M2, M3, M4)"), time: "17:00\n18:00", session2: formatSession("중급세션 (M2, M3, M4)") },
+    { session1: formatSession("상급세션 (M4, T1)"), time: "10:00\n ~11:00", session2: formatSession("상급세션 (M4, T1)") },
+    { session1: formatSession("Lv.4 라인업레슨"), time: "11:00\n ~12:00", session2: formatSession("초급세션 (M1, M2)") },
+    { session1: formatSession("중급세션 (M3, M4)"), time: "12:00\n ~13:00", session2: formatSession("중급세션 (M3, M4)") },
+    { session1: formatSession("Lv.5 턴기초레슨"), time: "13:00\n ~14:00", session2: formatSession("초급세션 (M1, M2)") },
+    { session1: formatSession("상급세션 (M4)"), time: "14:00\n ~15:00", session2: formatSession("상급세션 (M4)") },
+    { session1: formatSession("초급세션 (M2, M3)"), time: "15:00\n ~16:00", session2: formatSession("초급세션 (M2, M3)") },
+    { session1: formatSession("상급세션 (T1 T2)"), time: "16:00\n ~17:00", session2: formatSession("상급세션 (T1 T2)") },
+    { session1: formatSession("중급세션 (M2, M3, M4)"), time: "17:00\n ~18:00", session2: formatSession("중급세션 (M2, M3, M4)") },
   ];
 
   const getConditionClass = (condition: string) => {
