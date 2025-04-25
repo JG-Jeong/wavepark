@@ -10,16 +10,16 @@ import './components/InfoSection/InfoSection.module.css';
 const App: React.FC = () => {
   const temperature = {
     weather: "맑음",
-    air: 11.9,
-    water: 16.2,
+    air: 12.1,
+    water: 15.3,
     recommendedWax: "COOL",
   };
 
   const recommendations = [
     { suitType: "보드숏", condition: "불허" },
     { suitType: "스프링", condition: "불허" },
-    { suitType: "3/2", condition: "보류" },
-    { suitType: "3/2 기모", condition: "보류" },
+    { suitType: "3/2", condition: "조건부허용" },
+    { suitType: "3/2 기모", condition: "출격" },
     { suitType: "4/3", condition: "출격" },  
     { suitType: "4/3 기모", condition: "출격" },
     { suitType: "5mm", condition: "출격" },
