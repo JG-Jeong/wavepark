@@ -10,8 +10,8 @@ import './components/InfoSection/InfoSection.module.css';
 const App: React.FC = () => {
   const temperature = {
     weather: "맑음",
-    air: 12.1,
-    water: 15.3,
+    air: 15.1,
+    water: 15.7,
     recommendedWax: "COOL",
   };
 
