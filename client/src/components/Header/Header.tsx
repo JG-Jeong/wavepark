@@ -8,7 +8,7 @@ const Header: React.FC = () => {
 
   return (
     <div className={styles.header}>
-      <h1>웨이브파크 수온 알리미</h1>
+      <h2>웨이브파크 수온 알리미</h2>
       <p className={styles.date}>{formattedDate}</p>
     </div>
   );
