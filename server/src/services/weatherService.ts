@@ -1,48 +1,32 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import { Weather } from '../models/Weather';
 
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
-const WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5/weather';
+const LAT = 37.4395; // 시흥시 위도
+const LON = 126.7319; // 시흥시 경도
 
-export interface WeatherData {
-  temperature: number;
-  humidity: number;
-  description: string;
-}
-
-let cachedWeatherData: WeatherData | null = null;
-let lastUpdateTime: number = 0;
-
-export const getWeatherData = async (): Promise<WeatherData> => {
-  const currentTime = Date.now();
-  
-  // 1시간(3600000ms)이 지나지 않았다면 캐시된 데이터 반환
-  if (cachedWeatherData && (currentTime - lastUpdateTime) < 3600000) {
-    return cachedWeatherData;
-  }
-
+export const getWeatherData = async () => {
   try {
-    const response = await axios.get(WEATHER_API_URL, {
-      params: {
-        q: 'Seoul', // 서울 기준
-        appid: WEATHER_API_KEY,
-        units: 'metric' // 섭씨 온도 사용
-      }
-    });
+    const response = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${LAT}&lon=${LON}&appid=${WEATHER_API_KEY}&units=metric&lang=kr`
+    );
 
-    const data = response.data;
-    cachedWeatherData = {
-      temperature: data.main.temp,
-      humidity: data.main.humidity,
-      description: data.weather[0].description
+    const weatherData = {
+      temperature: response.data.main.temp,
+      humidity: response.data.main.humidity,
+      description: response.data.weather[0].description,
+      airTemp: response.data.main.temp,
+      waterTemp: response.data.main.temp - 2, // 수온은 기온보다 2도 낮다고 가정
+      weather: response.data.weather[0].main
     };
-    
-    lastUpdateTime = currentTime;
-    return cachedWeatherData;
+
+    // 데이터베이스에 저장
+    const weather = new Weather(weatherData);
+    await weather.save();
+
+    return weatherData;
   } catch (error) {
-    console.error('Error fetching weather data:', error);
+    console.error('날씨 데이터 가져오기 실패:', error);
     throw error;
   }
 }; 

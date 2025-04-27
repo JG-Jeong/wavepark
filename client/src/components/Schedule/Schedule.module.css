@@ -96,19 +96,23 @@ h2 {
 .advancedSession {
   background-color: #dc304d;
   color: white;
+  color-scheme: light;
 }
 
 .intermediateSession {
   background-color: #1a80d9;
   color: white;
+  color-scheme: light;
 }
 
 .beginnerSession {
   background-color: #f29f05;
   color: white;
+  color-scheme: light;
 }
 
 .lineupLesson {
   background-color: #fad7a0;
   color: black;
+  color-scheme: light;
 }

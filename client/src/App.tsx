@@ -12,16 +12,19 @@ interface WeatherData {
   temperature: number;
   humidity: number;
   description: string;
+  airTemp: number;
+  waterTemp: number;
+  weather: string;
 }
 
 const App: React.FC = () => {
-  const [weather, setWeather] = useState<WeatherData | null>(null);
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
 
   const temperature = {
-    weather: weather?.description || "맑음",
-    air: weather?.temperature || 15.1,
-    water: (weather?.temperature || 15.1) - 2,
-    recommendedWax: "COOL",
+    weather: weatherData?.weather || '맑음',
+    air: 12.2,
+    water: 15.4,
+    recommendedWax: 'COOL'
   };
 
   const recommendations = [
@@ -68,11 +71,11 @@ const App: React.FC = () => {
 
   const fetchWeather = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/weather');
+      const response = await fetch('http://localhost:3000/api/weather');
       const data = await response.json();
-      setWeather(data);
+      setWeatherData(data);
     } catch (error) {
-      console.error('Error fetching weather:', error);
+      console.error('Error fetching weather data:', error);
     }
   };
 
@@ -94,18 +97,6 @@ const App: React.FC = () => {
         <Schedule schedule={schedule} />
       </div>
       <Footer />
-      <header className="App-header">
-        {weather ? (
-          <div className="weather-info">
-            <h2>현재 날씨</h2>
-            <p>기온: {weather.temperature}°C</p>
-            <p>습도: {weather.humidity}%</p>
-            <p>상태: {weather.description}</p>
-          </div>
-        ) : (
-          <p>날씨 정보를 불러오는 중...</p>
-        )}
-      </header>
     </div>
   );
 };
