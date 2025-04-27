@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import Header from "./components/Header/Header";
 import InfoSection from "./components/InfoSection/InfoSection";
 import Schedule from "./components/Schedule/Schedule";
@@ -6,12 +6,21 @@ import Footer from "./components/Footer/Footer";
 import "./styles/global.css";
 import styles from "./Layout.module.css";
 import './components/InfoSection/InfoSection.module.css';
+import './App.css';
+
+interface WeatherData {
+  temperature: number;
+  humidity: number;
+  description: string;
+}
 
 const App: React.FC = () => {
+  const [weather, setWeather] = useState<WeatherData | null>(null);
+
   const temperature = {
-    weather: "맑음",
-    air: 15.1,
-    water: 15.7,
+    weather: weather?.description || "맑음",
+    air: weather?.temperature || 15.1,
+    water: (weather?.temperature || 15.1) - 2,
     recommendedWax: "COOL",
   };
 
@@ -57,17 +66,46 @@ const App: React.FC = () => {
     }
   };
 
+  const fetchWeather = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/api/weather');
+      const data = await response.json();
+      setWeather(data);
+    } catch (error) {
+      console.error('Error fetching weather:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchWeather();
+    // 1시간마다 날씨 정보 업데이트
+    const interval = setInterval(fetchWeather, 3600000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div>
       <Header />
-        <div className={styles.layout}>
-          <InfoSection
-            temperature={temperature}
-            recommendations={recommendations}
-          />
-          <Schedule schedule={schedule} />
-        </div>
+      <div className={styles.layout}>
+        <InfoSection
+          temperature={temperature}
+          recommendations={recommendations}
+        />
+        <Schedule schedule={schedule} />
+      </div>
       <Footer />
+      <header className="App-header">
+        {weather ? (
+          <div className="weather-info">
+            <h2>현재 날씨</h2>
+            <p>기온: {weather.temperature}°C</p>
+            <p>습도: {weather.humidity}%</p>
+            <p>상태: {weather.description}</p>
+          </div>
+        ) : (
+          <p>날씨 정보를 불러오는 중...</p>
+        )}
+      </header>
     </div>
   );
 };

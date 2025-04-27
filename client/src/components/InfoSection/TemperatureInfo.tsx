@@ -1,4 +1,5 @@
 import React from "react";
+import styles from './InfoSection.module.css';
 import { Temperature } from "../../types";
 
 interface TemperatureInfoProps {
@@ -6,12 +7,36 @@ interface TemperatureInfoProps {
 }
 
 const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
+  const getWeatherEmoji = (weather: string) => {
+    const weatherLower = weather.toLowerCase();
+    if (weatherLower.includes('맑음') || weatherLower.includes('clear')) return '☀️';
+    if (weatherLower.includes('흐림') || weatherLower.includes('cloud')) return '☁️';
+    if (weatherLower.includes('비') || weatherLower.includes('rain')) return '🌧️';
+    if (weatherLower.includes('눈') || weatherLower.includes('snow')) return '❄️';
+    return '🌤️';
+  };
+
+  const getWaxEmoji = (wax: string) => {
+    switch(wax) {
+      case 'COOL':
+        return '❄️';
+      case 'COLD':
+        return '🥶';
+      case 'WARM':
+        return '🌡️';
+      case 'TROPIC':
+        return '🔥';
+      default:
+        return '';
+    }
+  };
+
   return (
-    <table>
+    <table className={styles.table}>
       <tbody>
         <tr>
           <td>날씨</td>
-          <td>{data.weather}</td>
+          <td>{getWeatherEmoji(data.weather)} {data.weather}</td>
         </tr>
         <tr>
           <td>기온</td>
@@ -23,7 +48,7 @@ const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
         </tr>
         <tr>
           <td>추천왁스</td>
-          <td>{data.recommendedWax}</td>
+          <td>{getWaxEmoji(data.recommendedWax)} {data.recommendedWax}</td>
         </tr>
       </tbody>
     </table>
