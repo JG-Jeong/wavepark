@@ -1,54 +1,66 @@
 .layout {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0;
-  padding: 0;
-  box-sizing: border-box;
-  max-width: 1200px;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px; /* 최대 너비 제한 */
   margin: 0 auto;
-  min-height: calc(100vh - 100px);
-  height: calc(100vh - 100px);
-  overflow-y: auto;
+}
+
+.weekSuitRecommendation {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 20px;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px; /* 최대 너비 제한 */
+  margin: 0 auto;
+  overflow-x: auto; /* 가로 스크롤이 필요한 경우 스크롤바 표시 */
 }
 
 .infoSection {
-  width: 100%;
-  max-width: 100%;
-  flex: 1;
-  min-width: 300px;
-  margin-top: -30px;
+  flex: 0 0 65%;
+  min-width: 450px;
+  max-width: 800px; /* 최대 너비 제한 */
 }
 
 .schedule {
-  width: 100%;
-  max-width: 100%;
-  flex: 1;
-  min-width: 300px;
-  margin-top: -30px;
+  flex: 0 0 35%;
+  min-width: 280px;
+  max-width: 400px; /* 최대 너비 제한 */
 }
 
 /* 웹 화면에서의 레이아웃 */
 @media (max-width: 768px) {
   .layout {
-    flex-direction: row;
-    justify-content: center;
-    gap: 0;
-    padding: 0;
-    height: auto;
-    margin-top: -40px;
+    padding: 10px;
+    gap: 15px;
   }
 
-  .infoSection {
-    flex: 1.2;
-    max-width: 50%;
-    margin-top: -40px;
+  .contentContainer {
+    gap: 15px;
   }
 
-  .schedule {
-    flex: 0.8;
-    max-width: 40%;
-    margin-top: -40px;
+  .infoSection, .schedule {
+    min-width: 300px;
+    max-width: none; /* 모바일에서는 최대 너비 제한 해제 */
   }
+}
+
+.denied {
+  color: #dc3545;
+}
+
+.allowed {
+  color: #28a745;
+}
+
+.conditional {
+  color: #ffc107;
 }
 

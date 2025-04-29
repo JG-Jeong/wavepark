@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Header from "./components/Header/Header";
 import InfoSection from "./components/InfoSection/InfoSection";
 import Schedule from "./components/Schedule/Schedule";
+import WeekSuitRecommendation from "./components/WeekSuitRecommendation/WeekSuitRecommendation";
+import Tab from "./components/Tab/Tab";
 import Footer from "./components/Footer/Footer";
 import "./styles/global.css";
 import styles from "./Layout.module.css";
@@ -19,6 +21,7 @@ interface WeatherData {
 
 const App: React.FC = () => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const [activeTab, setActiveTab] = useState<'today' | 'week'>('today');
 
   const temperature = {
     weather: weatherData?.weather || '맑음',
@@ -89,12 +92,21 @@ const App: React.FC = () => {
   return (
     <div>
       <Header />
+      <Tab activeTab={activeTab} onTabChange={setActiveTab} />
       <div className={styles.layout}>
-        <InfoSection
-          temperature={temperature}
-          recommendations={recommendations}
-        />
-        <Schedule schedule={schedule} />
+        {activeTab === 'today' ? (
+          <>
+            <div className={styles.contentContainer}>
+              <InfoSection
+                temperature={temperature}
+                recommendations={recommendations}
+              />
+              <Schedule schedule={schedule} />
+            </div>
+          </>
+        ) : (
+          <WeekSuitRecommendation recommendations={recommendations} />
+        )}
       </div>
       <Footer />
     </div>

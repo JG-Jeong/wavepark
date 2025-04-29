@@ -5,6 +5,7 @@ export interface IWeather extends Document {
   airTemperature: number;
   waterTemperature: number;
   recommendedSuit: string;
+  weatherCondition: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -26,8 +27,14 @@ const WeatherSchema: Schema = new Schema({
   recommendedSuit: {
     type: String,
     required: true,
-    enum: ['3mm', '5mm', '7mm', 'dry']
-  }
+    enum: [ '보드숏', '스프링', '3/2', '3/2기모', '4/3' ,'4/3기모', '5mm', '세미드라이',]
+    
+  },
+  weatherCondition: {
+    type: String,
+    required: true,
+    enum: ['맑음', '구름', '비', '눈']
+  },
 }, {
   timestamps: true
 });
