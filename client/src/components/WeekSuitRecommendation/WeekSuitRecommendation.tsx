@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./WeekSuitRecommendation.module.css";
-import { SuitRecommendation } from "../../types";
+import { getLast7DaysWeather, WeatherData } from "../../services/weatherService";
 
-interface WeekSuitRecommendationProps {
-  recommendations: SuitRecommendation[];
-}
+const WeekSuitRecommendation: React.FC = () => {
+  const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-const WeekSuitRecommendation: React.FC<WeekSuitRecommendationProps> = ({ recommendations }) => {
+  useEffect(() => {
+    const fetchWeatherData = async () => {
+      try {
+        const data = await getLast7DaysWeather();
+        setWeatherData(data);
+        setLoading(false);
+      } catch (err) {
+        setError('날씨 데이터를 불러오는데 실패했습니다.');
+        setLoading(false);
+      }
+    };
+
+    fetchWeatherData();
+  }, []);
+
   // 한국의 공휴일 체크 함수
   const isKoreanHoliday = (date: Date): boolean => {
     const year = date.getFullYear();
@@ -66,6 +81,14 @@ const WeekSuitRecommendation: React.FC<WeekSuitRecommendationProps> = ({ recomme
 
   const weekDates = getPastWeekDates();
 
+  if (loading) {
+    return <div>로딩 중...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
     <div className={styles.weekSuitRecommendation}>
       <h2>지난 슈트 추천</h2>
@@ -92,11 +115,14 @@ const WeekSuitRecommendation: React.FC<WeekSuitRecommendationProps> = ({ recomme
           </thead>
           <tbody>
             <tr>
-              {weekDates.map((_, index) => (
-                <td key={index} className={styles.contentCell}>
-                  {"4/3 기모"}
-                </td>
-              ))}
+              {weekDates.map((_, index) => {
+                const weather = weatherData[index];
+                return (
+                  <td key={index} className={styles.contentCell}>
+                    {weather ? `${weather.wetsuitThickness}/3 기모` : '데이터 없음'}
+                  </td>
+                );
+              })}
             </tr>
           </tbody>
         </table>
