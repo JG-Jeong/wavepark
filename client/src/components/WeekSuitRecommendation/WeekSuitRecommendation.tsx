@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./WeekSuitRecommendation.module.css";
-import { getLast7DaysWeather, WeatherData } from "../../services/weatherService";
+import { getLast7DaysWeather, WeatherData, MaintenanceError } from "../../services/weatherService";
 
 const WeekSuitRecommendation: React.FC = () => {
   const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
@@ -14,7 +14,11 @@ const WeekSuitRecommendation: React.FC = () => {
         setWeatherData(data);
         setLoading(false);
       } catch (err) {
-        setError('날씨 데이터를 불러오는데 실패했습니다.');
+        if (err instanceof MaintenanceError) {
+          setError(err.message);
+        } else {
+          setError('날씨 데이터를 불러오는데 실패했습니다.');
+        }
         setLoading(false);
       }
     };
@@ -86,7 +90,12 @@ const WeekSuitRecommendation: React.FC = () => {
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return (
+      <div className={styles.errorContainer}>
+        <h2>지난 슈트 추천</h2>
+        <div className={styles.errorMessage}>{error}</div>
+      </div>
+    );
   }
 
   return (

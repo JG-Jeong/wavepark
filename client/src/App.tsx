@@ -105,7 +105,7 @@ const App: React.FC = () => {
             </div>
           </>
         ) : (
-          <WeekSuitRecommendation recommendations={recommendations} />
+          <WeekSuitRecommendation />
         )}
       </div>
       <Footer />
