@@ -25,17 +25,17 @@ const App: React.FC = () => {
 
   const temperature = {
     weather: weatherData?.weather || '맑음',
-    air: 16.3,
-    water: 15.4,
+    air: 14.3,
+    water: 9.4,
     recommendedWax: 'COOL'
   };
 
   const recommendations = [
     { suitType: "보드숏", condition: "불허" },
     { suitType: "스프링", condition: "불허" },
-    { suitType: "3/2", condition: "조건부허용" },
-    { suitType: "3/2 기모", condition: "출격" },
-    { suitType: "4/3", condition: "출격" },  
+    { suitType: "3/2", condition: "보류" },
+    { suitType: "3/2 기모", condition: "보류" },
+    { suitType: "4/3", condition: "보류" },  
     { suitType: "4/3 기모", condition: "출격" },
     { suitType: "5mm", condition: "출격" },
   ];
