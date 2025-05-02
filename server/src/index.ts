@@ -5,8 +5,7 @@ import mongoose from "mongoose";
 import cron from "node-cron";
 import { getWeather } from './controllers/weatherController';
 import { collectDailyData } from './services/dataCollectionService';
-import { weatherRouter } from './routes/weather';
-import { dataCollectionService } from './services/dataCollectionService';
+
 
 dotenv.config();
 
@@ -61,13 +60,9 @@ cron.schedule('0 9 * * *', () => {
 // 서버 시작 시 데이터 수집 실행
 collectDailyData();
 
-// 라우트 설정
-app.use('/api/weather', weatherRouter);
 
 // Start server
 app.listen(PORT, () => {
   console.log(`서버가 http://localhost:${PORT} 에서 실행 중입니다.`);
   
-  // 데이터 수집 서비스 시작
-  dataCollectionService.start();
 });
