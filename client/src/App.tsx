@@ -25,8 +25,8 @@ const App: React.FC = () => {
 
   const temperature = {
     weather: weatherData?.weather || '맑음',
-    air: 14.3,
-    water: 9.4,
+    air: 0,
+    water: 0,
     recommendedWax: 'COOL'
   };
 

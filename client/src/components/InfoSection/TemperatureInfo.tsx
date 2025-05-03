@@ -40,11 +40,11 @@ const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
         </tr>
         <tr>
           <td>기온</td>
-          <td>9.4°C</td>
+          <td>0°C</td>
         </tr>
         <tr>
           <td>수온</td>
-          <td>14.3°C</td>
+          <td>0°C</td>
         </tr>
         <tr>
           <td>추천왁스</td>
