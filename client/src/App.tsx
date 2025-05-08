@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Header from "./components/Header/Header";
 import InfoSection from "./components/InfoSection/InfoSection";
 import Schedule from "./components/Schedule/Schedule";
-import WeekSuitRecommendation from "./components/WeekSuitRecommendation/WeekSuitRecommendation";
 import Tab from "./components/Tab/Tab";
 import Footer from "./components/Footer/Footer";
+import LiveReservationTable from "./components/LiveReservationTable/LiveReservationTable";
 import "./styles/global.css";
 import styles from "./Layout.module.css";
 import './components/InfoSection/InfoSection.module.css';
@@ -21,7 +21,7 @@ interface WeatherData {
 
 const App: React.FC = () => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
-  const [activeTab, setActiveTab] = useState<'today' | 'week'>('today');
+  const [activeTab, setActiveTab] = useState<'today' | 'reservation'>('today');
 
   const temperature = {
     weather: weatherData?.weather || '맑음',
@@ -105,7 +105,7 @@ const App: React.FC = () => {
             </div>
           </>
         ) : (
-          <WeekSuitRecommendation />
+          <LiveReservationTable />
         )}
       </div>
       <Footer />

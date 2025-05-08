@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './Tab.module.css';
 
 interface TabProps {
-  activeTab: 'today' | 'week';
-  onTabChange: (tab: 'today' | 'week') => void;
+  activeTab: 'today' | 'reservation';
+  onTabChange: (tab: 'today' | 'reservation') => void;
 }
 
 const Tab: React.FC<TabProps> = ({ activeTab, onTabChange }) => {
@@ -16,10 +16,10 @@ const Tab: React.FC<TabProps> = ({ activeTab, onTabChange }) => {
         오늘 슈트 추천
       </button>
       <button
-        className={`${styles.tab} ${activeTab === 'week' ? styles.active : ''}`}
-        onClick={() => onTabChange('week')}
+        className={`${styles.tab} ${activeTab === 'reservation' ? styles.active : ''}`}
+        onClick={() => onTabChange('reservation')}
       >
-        지난 슈트 추천
+        예약현황
       </button>
     </div>
   );
