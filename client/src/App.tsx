@@ -5,6 +5,7 @@ import Schedule from "./components/Schedule/Schedule";
 import Reservation from "./components/Reservation/reservation";
 import Tab from "./components/Tab/Tab";
 import Footer from "./components/Footer/Footer";
+import LiveReservationTable from "./components/LiveReservationTable/LiveReservationTable";
 import "./styles/global.css";
 import styles from "./Layout.module.css";
 import "./components/InfoSection/InfoSection.module.css";
