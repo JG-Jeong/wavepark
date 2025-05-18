@@ -1,0 +1,100 @@
+.ui-datepicker {
+  border-radius: 7px !important;
+  margin: 20px 0 0;
+  width: 350px !important;
+  padding: 15px;
+  z-index: 9999 !important;
+  position: relative; /* 버튼의 절대 위치를 위한 기준점 */
+}
+
+.ui-widget-header,
+.ui-widget.ui-widget-content {
+  padding: 25px 25px 20px;
+  border: 0;
+  background: #fff;
+  display: flex; /* 제목과 버튼을 한 줄에 배치 */
+  align-items: center;
+  justify-content: space-between; /* 좌우 끝으로 버튼 배치 */
+  white-space: nowrap; /* 줄바꿈 방지 */
+}
+
+.ui-datepicker .ui-datepicker-title {
+  font-size: 1.375rem;
+  font-family: "Gmarket", sans-serif;
+  font-weight: 600;
+  color: #333;
+  flex-grow: 1;
+  text-align: center; /* 제목 중앙 정렬 */
+}
+
+.ui-datepicker .ui-datepicker-prev,
+.ui-datepicker .ui-datepicker-next {
+  position: absolute; /* 달력 컨테이너의 좌우 끝에 고정 */
+  top: 30px; /* 상단에서 약간 아래로 */
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.ui-datepicker .ui-datepicker-prev {
+  left: 10px; /* 왼쪽 끝에 위치 */
+}
+
+.ui-datepicker .ui-datepicker-next {
+  right: 10px; /* 오른쪽 끝에 위치 */
+}
+
+.ui-datepicker .ui-datepicker-prev span:before,
+.ui-datepicker .ui-datepicker-prev span:after,
+.ui-datepicker .ui-datepicker-next span:before,
+.ui-datepicker .ui-datepicker-next span:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 8px;
+  height: 2px;
+  background-color: #999;
+}
+
+.ui-datepicker .ui-datepicker-prev span:before {
+  transform: rotate(135deg);
+}
+
+.ui-datepicker .ui-datepicker-prev span:after {
+  top: 10px;
+  transform: rotate(45deg);
+}
+
+.ui-datepicker .ui-datepicker-next span:before {
+  top: 10px;
+  transform: rotate(135deg);
+}
+
+.ui-datepicker .ui-datepicker-next span:after {
+  transform: rotate(45deg);
+}
+
+.ui-datepicker .ui-datepicker-prev .ui-icon,
+.ui-datepicker .ui-datepicker-next .ui-icon {
+  background-image: none;
+}
+
+/* 모바일 반응형 스타일 */
+@media only screen and (max-width: 560px) {
+  .ui-datepicker {
+    width: 300px !important;
+    margin: 15px 0 0;
+  }
+  .ui-widget-header,
+  .ui-widget.ui-widget-content {
+    padding: 15px;
+  }
+  .ui-datepicker .ui-datepicker-title {
+    font-size: 1.25rem;
+  }
+  .ui-datepicker .ui-datepicker-prev,
+  .ui-datepicker .ui-datepicker-next {
+    top: 20px; /* 모바일에서 버튼 위치 조정 */
+  }
+}
