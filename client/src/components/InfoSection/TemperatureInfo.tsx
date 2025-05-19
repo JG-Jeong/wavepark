@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './InfoSection.module.css';
+import styles from "./InfoSection.module.css";
 import { Temperature } from "../../types";
 
 interface TemperatureInfoProps {
@@ -9,25 +9,31 @@ interface TemperatureInfoProps {
 const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
   const getWeatherEmoji = (weather: string) => {
     const weatherLower = weather.toLowerCase();
-    if (weatherLower.includes('맑음') || weatherLower.includes('clear')) return '☀️';
-    if (weatherLower.includes('흐림') || weatherLower.includes('cloud')) return '☁️';
-    if (weatherLower.includes('비') || weatherLower.includes('rain')) return '🌧️';
-    if (weatherLower.includes('눈') || weatherLower.includes('snow')) return '❄️';
-    return '🌤️';
+    if (weatherLower.includes("맑음") || weatherLower.includes("clear"))
+      return "☀️맑음";
+    if (weatherLower.includes("구름") || weatherLower.includes("cloud"))
+      return "☁️구름";
+    if (weatherLower.includes("비") || weatherLower.includes("rain"))
+      return "🌧️비";
+    if (weatherLower.includes("눈") || weatherLower.includes("snow"))
+      return "❄️눈";
+    if (weatherLower.includes("흐림") || weatherLower.includes("cloud"))
+      return "🌤️흐림";
+    return "";
   };
 
   const getWaxEmoji = (wax: string) => {
-    switch(wax) {
-      case 'COOL':
-        return '❄️';
-      case 'COLD':
-        return '🥶';
-      case 'WARM':
-        return '🌡️';
-      case 'TROPIC':
-        return '🔥';
+    switch (wax) {
+      case "COOL":
+        return "❄️";
+      case "COLD":
+        return "🥶";
+      case "WARM":
+        return "🌡️";
+      case "TROPIC":
+        return "🔥";
       default:
-        return '';
+        return "";
     }
   };
 
@@ -36,19 +42,21 @@ const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
       <tbody>
         <tr>
           <td>날씨</td>
-          <td>🌧️비</td>
+          <td>{getWeatherEmoji(data.weather)}</td>
         </tr>
         <tr>
           <td>기온</td>
-          <td>0°C</td>
+          <td>19°C</td>
         </tr>
         <tr>
           <td>수온</td>
-          <td>0°C</td>
+          <td>20.5°C</td>
         </tr>
         <tr>
           <td>추천왁스</td>
-          <td>{getWaxEmoji(data.recommendedWax)} {data.recommendedWax}</td>
+          <td>
+            {getWaxEmoji(data.recommendedWax)} {data.recommendedWax}
+          </td>
         </tr>
       </tbody>
     </table>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import InfoSection from "./components/InfoSection/InfoSection";
 import Schedule from "./components/Schedule/Schedule";
@@ -7,8 +7,8 @@ import Footer from "./components/Footer/Footer";
 import LiveReservationTable from "./components/LiveReservationTable/LiveReservationTable";
 import "./styles/global.css";
 import styles from "./Layout.module.css";
-import './components/InfoSection/InfoSection.module.css';
-import './App.css';
+import "./components/InfoSection/InfoSection.module.css";
+import "./App.css";
 
 interface WeatherData {
   temperature: number;
@@ -21,23 +21,23 @@ interface WeatherData {
 
 const App: React.FC = () => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
-  const [activeTab, setActiveTab] = useState<'today' | 'reservation'>('today');
+  const [activeTab, setActiveTab] = useState<"today" | "reservation">("today");
 
   const temperature = {
-    weather: weatherData?.weather || '맑음',
+    weather: weatherData?.weather || "맑음",
     air: 0,
     water: 0,
-    recommendedWax: 'COOL'
+    recommendedWax: "WARM",
   };
 
   const recommendations = [
-    { suitType: "보드숏", condition: "불허" },
-    { suitType: "스프링", condition: "불허" },
-    { suitType: "3/2", condition: "보류" },
-    { suitType: "3/2 기모", condition: "보류" },
-    { suitType: "4/3", condition: "보류" },  
-    { suitType: "4/3 기모", condition: "출격" },
-    { suitType: "5mm", condition: "출격" },
+    { suitType: "보드숏", condition: "보류" },
+    { suitType: "스프링", condition: "출격?" },
+    { suitType: "3/2", condition: "출격" },
+    { suitType: "3/2 기모", condition: "출격" },
+    { suitType: "4/3", condition: "출격" },
+    { suitType: "4/3 기모", condition: "보류" },
+    { suitType: "5mm", condition: "기각" },
   ];
 
   const formatSession = (session: string) => {
@@ -49,36 +49,68 @@ const App: React.FC = () => {
   };
 
   const schedule = [
-    { session1: formatSession("상급세션 (M4, T1)"), time: "10:00\n ~11:00", session2: formatSession("상급세션 (M4, T1)") },
-    { session1: formatSession("Lv.4 라인업레슨"), time: "11:00\n ~12:00", session2: formatSession("초급세션 (M1, M2)") },
-    { session1: formatSession("중급세션 (M3, M4)"), time: "12:00\n ~13:00", session2: formatSession("중급세션 (M3, M4)") },
-    { session1: formatSession("Lv.5 턴기초레슨"), time: "13:00\n ~14:00", session2: formatSession("초급세션 (M1, M2)") },
-    { session1: formatSession("상급세션 (M4)"), time: "14:00\n ~15:00", session2: formatSession("상급세션 (M4)") },
-    { session1: formatSession("초급세션 (M2, M3)"), time: "15:00\n ~16:00", session2: formatSession("초급세션 (M2, M3)") },
-    { session1: formatSession("상급세션 (T1 T2)"), time: "16:00\n ~17:00", session2: formatSession("상급세션 (T1 T2)") },
-    { session1: formatSession("중급세션 (M2, M3, M4)"), time: "17:00\n ~18:00", session2: formatSession("중급세션 (M2, M3, M4)") },
+    {
+      session1: formatSession("상급세션 (M4, T1)"),
+      time: "10:00\n ~11:00",
+      session2: formatSession("상급세션 (M4, T1)"),
+    },
+    {
+      session1: formatSession("Lv.4 라인업레슨"),
+      time: "11:00\n ~12:00",
+      session2: formatSession("초급세션 (M1, M2)"),
+    },
+    {
+      session1: formatSession("중급세션 (M3, M4)"),
+      time: "12:00\n ~13:00",
+      session2: formatSession("중급세션 (M3, M4)"),
+    },
+    {
+      session1: formatSession("Lv.5 턴기초레슨"),
+      time: "13:00\n ~14:00",
+      session2: formatSession("초급세션 (M1, M2)"),
+    },
+    {
+      session1: formatSession("상급세션 (M4)"),
+      time: "14:00\n ~15:00",
+      session2: formatSession("상급세션 (M4)"),
+    },
+    {
+      session1: formatSession("초급세션 (M2, M3)"),
+      time: "15:00\n ~16:00",
+      session2: formatSession("초급세션 (M2, M3)"),
+    },
+    {
+      session1: formatSession("상급세션 (T1 T2)"),
+      time: "16:00\n ~17:00",
+      session2: formatSession("상급세션 (T1 T2)"),
+    },
+    {
+      session1: formatSession("중급세션 (M2, M3, M4)"),
+      time: "17:00\n ~18:00",
+      session2: formatSession("중급세션 (M2, M3, M4)"),
+    },
   ];
 
   const getConditionClass = (condition: string) => {
     switch (condition) {
-      case '불허':
+      case "불허":
         return styles.denied;
-      case '출격':
+      case "출격":
         return styles.allowed;
-      case '조건부허용':
+      case "조건부허용":
         return styles.conditional;
       default:
-        return '';
+        return "";
     }
   };
 
   const fetchWeather = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/weather');
+      const response = await fetch("http://localhost:3000/api/weather");
       const data = await response.json();
       setWeatherData(data);
     } catch (error) {
-      console.error('Error fetching weather data:', error);
+      console.error("Error fetching weather data:", error);
     }
   };
 
@@ -94,7 +126,7 @@ const App: React.FC = () => {
       <Header />
       <Tab activeTab={activeTab} onTabChange={setActiveTab} />
       <div className={styles.layout}>
-        {activeTab === 'today' ? (
+        {activeTab === "today" ? (
           <>
             <div className={styles.contentContainer}>
               <InfoSection
