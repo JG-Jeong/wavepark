@@ -10,34 +10,42 @@ import styles from "./Layout.module.css";
 import "./components/InfoSection/InfoSection.module.css";
 import "./App.css";
 
-interface WeatherData {
-  temperature: number;
-  humidity: number;
-  description: string;
-  airTemp: number;
-  waterTemp: number;
-  weather: string;
-}
+// Hooks
+import { useWaterTemp } from "./hooks/useWaterTemp";
+
+const WATER_API_URL = process.env.REACT_APP_WATER_API_URL!;
 
 const App: React.FC = () => {
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [activeTab, setActiveTab] = useState<"today" | "reservation">("today");
 
+  // const { data: waterData, error: tError } = useWaterTemp(WATER_API_URL);
+
+  // 날씨/수온 준비 전 로딩
+  // if (!waterData) {
+  //   return <p className={styles.loading}>Loading....</p>;
+  // }
+  // if (tError) {
+  //   return <p className={styles.error}>Water Temp Error : {tError}</p>;
+  // }
+
   const temperature = {
-    weather: weatherData?.weather || "맑음",
-    air: 0,
-    water: 0,
-    recommendedWax: "WARM",
+    //수정 필요. 날씨 데이터 불러와서 기록할것.
+    weather: "비",
+    //수정필요. 날씨 데이터 불러와서 기록할것. 기상청
+    airTemp: 19,
+    // waterTemp: waterData!.temperature,
+    waterTemp: 20.9,
+    recommendedWax: "COOL" as const,
   };
 
   const recommendations = [
     { suitType: "보드숏", condition: "보류" },
-    { suitType: "스프링", condition: "출격?" },
+    { suitType: "스프링", condition: "출격" },
     { suitType: "3/2", condition: "출격" },
     { suitType: "3/2 기모", condition: "출격" },
     { suitType: "4/3", condition: "출격" },
-    { suitType: "4/3 기모", condition: "보류" },
-    { suitType: "5mm", condition: "기각" },
+    { suitType: "4/3 기모", condition: "불허" },
+    { suitType: "5mm", condition: "불허" },
   ];
 
   const formatSession = (session: string) => {
@@ -91,51 +99,19 @@ const App: React.FC = () => {
     },
   ];
 
-  const getConditionClass = (condition: string) => {
-    switch (condition) {
-      case "불허":
-        return styles.denied;
-      case "출격":
-        return styles.allowed;
-      case "조건부허용":
-        return styles.conditional;
-      default:
-        return "";
-    }
-  };
-
-  const fetchWeather = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/api/weather");
-      const data = await response.json();
-      setWeatherData(data);
-    } catch (error) {
-      console.error("Error fetching weather data:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchWeather();
-    // 1시간마다 날씨 정보 업데이트
-    const interval = setInterval(fetchWeather, 3600000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div>
       <Header />
       <Tab activeTab={activeTab} onTabChange={setActiveTab} />
       <div className={styles.layout}>
         {activeTab === "today" ? (
-          <>
-            <div className={styles.contentContainer}>
-              <InfoSection
-                temperature={temperature}
-                recommendations={recommendations}
-              />
-              <Schedule schedule={schedule} />
-            </div>
-          </>
+          <div className={styles.contentContainer}>
+            <InfoSection
+              temperature={temperature}
+              recommendations={recommendations}
+            />
+            <Schedule schedule={schedule} />
+          </div>
         ) : (
           <LiveReservationTable />
         )}

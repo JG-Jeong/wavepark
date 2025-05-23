@@ -7,6 +7,7 @@ interface TemperatureInfoProps {
 }
 
 const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
+  // 날씨에 따라 데이터를 넣고 이모지도 넣는 함수
   const getWeatherEmoji = (weather: string) => {
     const weatherLower = weather.toLowerCase();
     if (weatherLower.includes("맑음") || weatherLower.includes("clear"))
@@ -22,6 +23,7 @@ const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
     return "";
   };
 
+  // 날씨에 따라 왁스 추천
   const getWaxEmoji = (wax: string) => {
     switch (wax) {
       case "COOL":
@@ -50,7 +52,7 @@ const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
         </tr>
         <tr>
           <td>수온</td>
-          <td>20.5°C</td>
+          <td>20.9°C</td>
         </tr>
         <tr>
           <td>추천왁스</td>

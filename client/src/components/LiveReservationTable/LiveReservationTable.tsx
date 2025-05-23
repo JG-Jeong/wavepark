@@ -1,6 +1,6 @@
 // src/components/LiveReservationTable.tsx
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 interface ReservationRow {
   time: string;
@@ -14,30 +14,30 @@ interface ReservationRow {
 
 const LiveReservationTable: React.FC = () => {
   const [data, setData] = useState<ReservationRow[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const fetchReservationData = async () => {
     try {
-      setLoading(true);
+      setLoading(false);
 
-      // 실제 Wavepark API가 로그인 세션 필요하므로 백엔드 프록시로 우회하거나 수동 테스트 필요
-      const response = await axios.get<ReservationRow[]>('/api/reservation');
+      // 백엔드에서 미리 데이터를 collecting해서 가져올 예정.
+      const response = await axios.get<ReservationRow[]>("/api/reservation");
 
       setData(response.data);
-      setLoading(false);
+      setLoading(true);
     } catch (err) {
       console.error(err);
-      setError('예약 데이터를 불러올 수 없습니다.');
-      setLoading(false);
+      setError("예약 데이터를 불러올 수 없습니다.");
+      setLoading(true);
     }
   };
 
-  useEffect(() => {
-    fetchReservationData();
-    const interval = setInterval(fetchReservationData, 10 * 60 * 1000); // 10분마다
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   fetchReservationData();
+  //   const interval = setInterval(fetchReservationData, 10 * 60 * 1000); // 10분마다
+  //   return () => clearInterval(interval);
+  // }, []);
 
   if (loading) return <div>로딩 중...</div>;
   if (error) return <div>{error}</div>;
@@ -49,24 +49,18 @@ const LiveReservationTable: React.FC = () => {
         <thead className="bg-gray-200">
           <tr>
             <th>시간</th>
-            <th>총 CAPA</th>
             <th>코스</th>
             <th>리프좌</th>
             <th>리프우</th>
-            <th>베이좌</th>
-            <th>베이우</th>
           </tr>
         </thead>
         <tbody>
           {data.map((row, idx) => (
             <tr key={idx} className="text-center border-t">
-              <td>{row.time}</td>
-              <td>{row.totalCapa}</td>
-              <td>{row.course}</td>
               <td>{row.reefLeft}</td>
+              <td>{row.time}</td>
+              <td>{row.course}</td>
               <td>{row.reefRight}</td>
-              <td>{row.bayLeft}</td>
-              <td>{row.bayRight}</td>
             </tr>
           ))}
         </tbody>
