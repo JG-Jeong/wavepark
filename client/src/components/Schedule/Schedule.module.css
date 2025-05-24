@@ -20,18 +20,6 @@ table {
   font-size: 0.9em;
 }
 
-th, td {
-  padding: 4px 3px;
-  border: 1px solid #ddd;
-  text-align: center;
-  white-space: pre-wrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.4;
-  min-height: 40px;
-  vertical-align: middle;
-}
-
 .timeColumn {
   white-space: pre-line;
   line-height: 1.4;
@@ -43,7 +31,8 @@ th, td {
     min-width: 220px;
   }
 
-  th, td {
+  th,
+  td {
     padding: 3px 2px;
     font-size: 0.8em;
     min-height: 35px;
@@ -60,20 +49,6 @@ thead tr {
 }
 
 thead th:first-child,
-tbody td:first-child {
-  width: 40%;
-}
-
-thead th:nth-child(2),
-tbody td:nth-child(2) {
-  width: 20%;
-}
-
-thead th:last-child,
-tbody td:last-child {
-  width: 40%;
-}
-
 thead th {
   padding: 8px 4px;
   font-size: 0.9em;

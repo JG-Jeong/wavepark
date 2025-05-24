@@ -109,13 +109,7 @@ const App: React.FC = () => {
             <Schedule schedule={schedule} />
           </div>
         ) : (
-          <ReservationViewer
-            today={new Date()}
-            selectedDate={selectedDate}
-            loading={loading}
-            data={reservationData}
-            onDateChange={setSelectedDate}
-          />
+          <ReservationViewer />
         )}
       </div>
     </div>
