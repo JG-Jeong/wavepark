@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
+import "./styles/global.css";
+import styles from "./Layout.module.css";
+import "./App.css";
+import { ReservationRow } from "./types/types";
+
+//Components
+import ReservationViewer from "./components/LiveReservationTable/LiveReservation";
+import "./components/InfoSection/InfoSection.module.css";
 import Header from "./components/Header/Header";
 import InfoSection from "./components/InfoSection/InfoSection";
 import Schedule from "./components/Schedule/Schedule";
 import Tab from "./components/Tab/Tab";
 import Footer from "./components/Footer/Footer";
-import LiveReservationTable from "./components/LiveReservationTable/LiveReservationTable";
-import "./styles/global.css";
-import styles from "./Layout.module.css";
-import "./components/InfoSection/InfoSection.module.css";
-import "./App.css";
 
 // Hooks
 import { useWaterTemp } from "./hooks/useWaterTemp";
@@ -17,25 +20,18 @@ const WATER_API_URL = process.env.REACT_APP_WATER_API_URL!;
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"today" | "reservation">("today");
-
-  // const { data: waterData, error: tError } = useWaterTemp(WATER_API_URL);
-
-  // 날씨/수온 준비 전 로딩
-  // if (!waterData) {
-  //   return <p className={styles.loading}>Loading....</p>;
-  // }
-  // if (tError) {
-  //   return <p className={styles.error}>Water Temp Error : {tError}</p>;
-  // }
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [loading, setLoading] = useState(false);
+  const [reservationData, setReservationData] = useState<ReservationRow[]>([]);
 
   const temperature = {
     //수정 필요. 날씨 데이터 불러와서 기록할것.
-    weather: "비",
+    weather: "맑음",
     //수정필요. 날씨 데이터 불러와서 기록할것. 기상청
-    airTemp: 19,
+    airTemp: 22,
     // waterTemp: waterData!.temperature,
     waterTemp: 20.9,
-    recommendedWax: "COOL" as const,
+    recommendedWax: "WARM" as const,
   };
 
   const recommendations = [
@@ -113,10 +109,15 @@ const App: React.FC = () => {
             <Schedule schedule={schedule} />
           </div>
         ) : (
-          <LiveReservationTable />
+          <ReservationViewer
+            today={new Date()}
+            selectedDate={selectedDate}
+            loading={loading}
+            data={reservationData}
+            onDateChange={setSelectedDate}
+          />
         )}
       </div>
-      <Footer />
     </div>
   );
 };

@@ -1,72 +1,109 @@
-// src/components/LiveReservationTable.tsx
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+// src/lib/fetch-reservations.ts
+import { format } from "date-fns";
+import type { ReservationRow } from "../../types/types";
 
-interface ReservationRow {
-  time: string;
-  totalCapa: string;
-  course: string;
-  reefLeft: string;
-  reefRight: string;
-  bayLeft: string;
-  bayRight: string;
+/**
+ * 날짜 문자열(yyyy-MM-dd)을 주면
+ * 해당 날짜에 맞춰 모의 예약 데이터를 반환합니다.
+ */
+export async function fetchReservations(
+  dateParam?: string
+): Promise<ReservationRow[]> {
+  // 1) 파라미터가 없으면 오늘 날짜
+  const todayStr = format(new Date(), "yyyy-MM-dd");
+
+  // 2) 문자열 → Date → day(1~31) 추출
+  const ds = dateParam || todayStr;
+  const date = new Date(ds);
+  const day = date.getDate();
+
+  // 3) seed 기반 mock 생성
+  return generateMockReservations(day);
 }
 
-const LiveReservationTable: React.FC = () => {
-  const [data, setData] = useState<ReservationRow[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+function generateMockReservations(day: number): ReservationRow[] {
+  const seed = "25";
 
-  const fetchReservationData = async () => {
-    try {
-      setLoading(false);
-
-      // 백엔드에서 미리 데이터를 collecting해서 가져올 예정.
-      const response = await axios.get<ReservationRow[]>("/api/reservation");
-
-      setData(response.data);
-      setLoading(true);
-    } catch (err) {
-      console.error(err);
-      setError("예약 데이터를 불러올 수 없습니다.");
-      setLoading(true);
-    }
-  };
-
-  // useEffect(() => {
-  //   fetchReservationData();
-  //   const interval = setInterval(fetchReservationData, 10 * 60 * 1000); // 10분마다
-  //   return () => clearInterval(interval);
-  // }, []);
-
-  if (loading) return <div>로딩 중...</div>;
-  if (error) return <div>{error}</div>;
-
-  return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">실시간 예약현황</h2>
-      <table className="w-full border text-sm">
-        <thead className="bg-gray-200">
-          <tr>
-            <th>시간</th>
-            <th>코스</th>
-            <th>리프좌</th>
-            <th>리프우</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row, idx) => (
-            <tr key={idx} className="text-center border-t">
-              <td>{row.reefLeft}</td>
-              <td>{row.time}</td>
-              <td>{row.course}</td>
-              <td>{row.reefRight}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-};
-
-export default LiveReservationTable;
+  return [
+    {
+      time: "10:00 ~ 11:00",
+      courses: [
+        {
+          name: "리프상급",
+          left: "17",
+          right: "17",
+        },
+      ],
+    },
+    {
+      time: "11:00 ~ 12:00",
+      courses: [
+        {
+          name: "리프초급",
+          left: "-",
+          right: "25",
+        },
+      ],
+    },
+    {
+      time: "12:00 ~ 13:00",
+      courses: [
+        {
+          name: "리프중급",
+          left: "25",
+          right: "25",
+        },
+      ],
+    },
+    {
+      time: "13:00 ~ 14:00",
+      courses: [
+        {
+          name: "리프중급",
+          left: "25",
+          right: "25",
+        },
+      ],
+    },
+    {
+      time: "14:00 ~ 15:00",
+      courses: [
+        {
+          name: "리프상급",
+          left: "17",
+          right: "17",
+        },
+      ],
+    },
+    {
+      time: "15:00 ~ 16:00",
+      courses: [
+        {
+          name: "리프초급",
+          left: "25",
+          right: "25",
+        },
+      ],
+    },
+    {
+      time: "16:00 ~ 17:00",
+      courses: [
+        {
+          name: "리프상급",
+          left: "17",
+          right: "17",
+        },
+      ],
+    },
+    {
+      time: "17:00 ~ 18:00",
+      courses: [
+        {
+          name: "리프중급",
+          left: "25",
+          right: "25",
+        },
+      ],
+    },
+  ];
+}

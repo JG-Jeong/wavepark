@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./InfoSection.module.css";
-import { Temperature } from "../../types";
+import { Temperature } from "../../types/types";
 
 interface TemperatureInfoProps {
   data: Temperature;

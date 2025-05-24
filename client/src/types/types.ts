@@ -19,3 +19,14 @@ export interface ScheduleItem {
 export interface Schedule {
   schedule: ScheduleItem[];
 }
+
+export interface Course {
+  name: string;
+  left: string | number;
+  right: string | number;
+}
+
+export interface ReservationRow {
+  time: string;
+  courses: Course[];
+}

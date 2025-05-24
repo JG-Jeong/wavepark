@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Schedule.module.css";
 import ScheduleTable from "./ScheduleTable";
-import { ScheduleItem } from "../../types";
+import { ScheduleItem } from "../../types/types";
 
 interface ScheduleProps {
   schedule: ScheduleItem[];

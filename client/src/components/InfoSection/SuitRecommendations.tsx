@@ -1,5 +1,5 @@
 import React from "react";
-import { SuitRecommendation } from "../../types";
+import { SuitRecommendation } from "../../types/types";
 import styles from "./InfoSection.module.css";
 
 interface SuitRecommendationsProps {
@@ -20,14 +20,18 @@ const SuitRecommendations: React.FC<SuitRecommendationsProps> = ({
       <table className={styles.suitTable}>
         <thead>
           <tr>
-            <th colSpan={2} className={styles.header}>슈트 추천</th>
+            <th colSpan={2} className={styles.header}>
+              슈트 추천
+            </th>
           </tr>
         </thead>
         <tbody>
           {recommendations.map((item, index) => (
             <tr key={index}>
               <td>{item.suitType}</td>
-              <td className={getConditionClass(item.condition)}>{item.condition}</td>
+              <td className={getConditionClass(item.condition)}>
+                {item.condition}
+              </td>
             </tr>
           ))}
         </tbody>

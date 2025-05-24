@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./InfoSection.module.css";
 import TemperatureInfo from "./TemperatureInfo";
 import SuitRecommendations from "./SuitRecommendations";
-import { Temperature, SuitRecommendation } from "../../types";
+import { Temperature, SuitRecommendation } from "../../types/types";
 
 interface InfoSectionProps {
   temperature: Temperature;
