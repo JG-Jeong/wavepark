@@ -11,7 +11,6 @@ import Header from "./components/Header/Header";
 import InfoSection from "./components/InfoSection/InfoSection";
 import Schedule from "./components/Schedule/Schedule";
 import Tab from "./components/Tab/Tab";
-import Footer from "./components/Footer/Footer";
 
 // Hooks
 import { useWaterTemp } from "./hooks/useWaterTemp";

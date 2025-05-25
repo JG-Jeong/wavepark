@@ -2,6 +2,8 @@ import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { ReservationItem, ReservationResponse } from "./types";
 
+const lambda_api_url = process.env.REACT_APP_LAMBDA_API_URL;
+
 // Reservation 데이터를 좌,우 를 그룹화 하는 타입
 interface GroupedReservation {
   시간: string;
@@ -30,7 +32,7 @@ export default function ReservationViewer() {
       const dateStr = format(selectedDate, "yyyy-MM-dd");
 
       try {
-        const res = await fetch(`http://localhost:8000/reservation/${dateStr}`);
+        const res = await fetch(`${lambda_api_url}/reservation/${dateStr}`);
         if (!res.ok) {
           throw new Error(`HTTP ${res.status}`);
         }
@@ -43,6 +45,7 @@ export default function ReservationViewer() {
         setLoading(false);
       }
     }
+
     load();
   }, [selectedDate]);
 
@@ -62,8 +65,6 @@ export default function ReservationViewer() {
     },
     [] as GroupedReservation[]
   );
-
-  console.log(grouped);
 
   return (
     <div>
