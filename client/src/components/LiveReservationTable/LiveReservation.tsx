@@ -49,7 +49,7 @@ export default function ReservationViewer() {
     load();
   }, [selectedDate]);
 
-  // 시간+세션 키로 좌/우를 합치는 로직 # 이걸 원래 백에서 하는게 좋은겨? 프론트에서 하는거여?
+  // 시간+세션 키로 좌/우를 합치는 로직
   const grouped: GroupedReservation[] = reservations.reduce(
     (acc, { 시간, 세션, 방향, 남은좌석 }) => {
       // 이미 같은 시간·세션을 담은 객체가 있나 찾아보고…
@@ -64,6 +64,7 @@ export default function ReservationViewer() {
       // 방향에 따라 left/right 채우기
       if (방향 === "좌") entry.left = `${남은좌석}/${capacity}`;
       else if (방향 === "우") entry.right = `${남은좌석}/${capacity}`;
+
       return acc;
     },
     [] as GroupedReservation[]
@@ -106,14 +107,54 @@ export default function ReservationViewer() {
               </tr>
             </thead>
             <tbody>
-              {grouped.map((row, i) => (
-                <tr key={i}>
-                  <td>{row.시간.split(" ")[1].slice(0, 5)}</td>
-                  <td>{row.세션}</td>
-                  <td>{row.left}</td>
-                  <td>{row.right}</td>
-                </tr>
-              ))}
+              <tr>
+                <td>{grouped[0]?.시간.split(" ")[1].slice(0, 5)}</td>
+                <td>{grouped[0]?.세션} (M4,T1) </td>
+                <td>{grouped[0]?.left}</td>
+                <td>{grouped[0]?.right}</td>
+              </tr>
+              <tr>
+                <td>{grouped[1]?.시간.split(" ")[1].slice(0, 5)}</td>
+                <td>{grouped[1]?.세션} (M1e,M2e) </td>
+                <td>{grouped[1]?.left}</td>
+                <td>{grouped[1]?.right}</td>
+              </tr>
+              <tr>
+                <td>{grouped[2]?.시간.split(" ")[1].slice(0, 5)}</td>
+                <td>{grouped[2]?.세션} (M3,M4) </td>
+                <td>{grouped[2]?.left}</td>
+                <td>{grouped[2]?.right}</td>
+              </tr>{" "}
+              <tr>
+                <td>{grouped[3]?.시간.split(" ")[1].slice(0, 5)}</td>
+                <td>{grouped[3]?.세션} (M1,M2) </td>
+                <td>{grouped[3]?.left}</td>
+                <td>{grouped[3]?.right}</td>
+              </tr>
+              <tr>
+                <td>{grouped[4]?.시간.split(" ")[1].slice(0, 5)}</td>
+                <td>{grouped[4]?.세션} (M4) </td>
+                <td>{grouped[4]?.left}</td>
+                <td>{grouped[4]?.right}</td>
+              </tr>
+              <tr>
+                <td>{grouped[5]?.시간.split(" ")[1].slice(0, 5)}</td>
+                <td>{grouped[5]?.세션} (M2, M3) </td>
+                <td>{grouped[5]?.left}</td>
+                <td>{grouped[5]?.right}</td>
+              </tr>
+              <tr>
+                <td>{grouped[6]?.시간.split(" ")[1].slice(0, 5)}</td>
+                <td>{grouped[6]?.세션} (T1, T2) </td>
+                <td>{grouped[6]?.left}</td>
+                <td>{grouped[6]?.right}</td>
+              </tr>
+              <tr>
+                <td>{grouped[7]?.시간.split(" ")[1].slice(0, 5)}</td>
+                <td>{grouped[7]?.세션} (M2,M3,M4) </td>
+                <td>{grouped[7]?.left}</td>
+                <td>{grouped[7]?.right}</td>
+              </tr>
             </tbody>
           </table>
         )}

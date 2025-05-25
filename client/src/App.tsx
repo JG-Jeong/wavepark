@@ -15,8 +15,6 @@ import Tab from "./components/Tab/Tab";
 // Hooks
 import { useWaterTemp } from "./hooks/useWaterTemp";
 
-console.log("▶ LAMBDA_API_URL:", process.env.REACT_APP_LAMBDA_API_URL);
-
 const WATER_API_URL = process.env.REACT_APP_WATER_API_URL!;
 
 const App: React.FC = () => {
