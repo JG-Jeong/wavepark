@@ -7,3 +7,5 @@ server/node_modules/
 
 # TypeScript 빌드 출력
 server/dist/
+.vercel
+.env*.local

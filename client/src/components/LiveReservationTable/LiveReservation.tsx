@@ -58,9 +58,12 @@ export default function ReservationViewer() {
         entry = { 시간, 세션, left: "-", right: "-" };
         acc.push(entry);
       }
+      // 상급이면 17, 아니면 25
+      const capacity = 세션 === "상급" ? 17 : 25;
+
       // 방향에 따라 left/right 채우기
-      if (방향 === "좌") entry.left = `${남은좌석}/25`;
-      else if (방향 === "우") entry.right = `${남은좌석}/25`;
+      if (방향 === "좌") entry.left = `${남은좌석}/${capacity}`;
+      else if (방향 === "우") entry.right = `${남은좌석}/${capacity}`;
       return acc;
     },
     [] as GroupedReservation[]
@@ -85,6 +88,7 @@ export default function ReservationViewer() {
             }}
           />
         </label>
+        <div>남은자리/총자리수 입니다.</div>
 
         {loading && <p>불러오는 중…</p>}
         {error && (
