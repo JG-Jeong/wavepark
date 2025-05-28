@@ -2,36 +2,57 @@ import React, { useEffect, useState } from "react";
 import "./styles/global.css";
 import styles from "./Layout.module.css";
 import "./App.css";
-import { ReservationRow } from "./types/types";
 
 //Components
 import ReservationViewer from "./components/LiveReservationTable/LiveReservation";
-import "./components/InfoSection/InfoSection.module.css";
 import Header from "./components/Header/Header";
 import InfoSection from "./components/InfoSection/InfoSection";
 import Schedule from "./components/Schedule/Schedule";
 import Tab from "./components/Tab/Tab";
+import { Temperature } from "./types/types";
 
-// Hooks
-import { useWaterTemp } from "./hooks/useWaterTemp";
-
-const WATER_API_URL = process.env.REACT_APP_WATER_API_URL!;
+interface ApiResponse {
+  temperature: number;
+  humidity: number;
+  water_temperature: number;
+  timestamp: string;
+}
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"today" | "reservation">("today");
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  const [loading, setLoading] = useState(false);
-  const [reservationData, setReservationData] = useState<ReservationRow[]>([]);
+  const [temperatureData, setTemperatureData] = useState<Temperature | null>(
+    null
+  );
+  const [error, setError] = useState<string | null>(null);
 
-  const temperature = {
-    //수정 필요. 날씨 데이터 불러와서 기록할것.
-    weather: "맑음",
-    //수정필요. 날씨 데이터 불러와서 기록할것. 기상청
-    airTemp: 22,
-    // waterTemp: waterData!.temperature,
-    waterTemp: 20.9,
-    recommendedWax: "WARM" as const,
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(process.env.REACT_APP_WATER_API_URL!);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const apiData: ApiResponse = await response.json();
+        // 하드코딩된 날씨와 추천 왁스
+        const data: Temperature = {
+          temperature: apiData.temperature,
+          humidity: apiData.humidity,
+          water_temperature: apiData.water_temperature,
+          weather: "맑음", // 매일 수동 업데이트
+          recommendedWax: "WARM", // 매일 수동 업데이트
+        };
+        setTemperatureData(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Unknown error");
+      }
+    };
+
+    fetchData();
+    // 1시간마다 데이터 갱신 (Raspberry Pi가 1시간마다 전송)
+    const interval = setInterval(fetchData, 60 * 60 * 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const recommendations = [
     { suitType: "보드숏", condition: "보류" },
@@ -94,6 +115,14 @@ const App: React.FC = () => {
     },
   ];
 
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!temperatureData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <Header />
@@ -102,7 +131,7 @@ const App: React.FC = () => {
         {activeTab === "today" ? (
           <div className={styles.contentContainer}>
             <InfoSection
-              temperature={temperature}
+              temperature={temperatureData}
               recommendations={recommendations}
             />
             <Schedule schedule={schedule} />

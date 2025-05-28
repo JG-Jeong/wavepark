@@ -1,8 +1,10 @@
 export interface Temperature {
-  weather: string; // 날씨
-  airTemp: number; // 기온
-  waterTemp: number; // 수온
-  recommendedWax: string; //추천왁스
+  temperature: number; // API: 기온
+  humidity: number; // API: 습도
+  water_temperature: number; // API: 수온
+  weather: string; // 하드코딩: 날씨
+  recommendedWax: string; // 하드코딩: 추천 왁스
+  timestamp?: string; // API: 선택적, 사용하지 않음
 }
 
 export interface SuitRecommendation {

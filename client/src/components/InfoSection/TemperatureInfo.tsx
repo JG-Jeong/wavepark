@@ -48,11 +48,15 @@ const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
         </tr>
         <tr>
           <td>기온</td>
-          <td>19°C</td>
+          <td>{data.temperature.toFixed(1)}°C</td>
         </tr>
         <tr>
           <td>수온</td>
-          <td>20.9°C</td>
+          <td>{data.water_temperature.toFixed(1)}°C</td>
+        </tr>
+        <tr>
+          <td>습도</td>
+          <td>{data.humidity.toFixed(1)}%</td>
         </tr>
         <tr>
           <td>추천왁스</td>
