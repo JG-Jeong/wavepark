@@ -6,8 +6,7 @@ const Header: React.FC = () => {
   return (
     <div className={styles.header}>
       <div className={styles.ciWrap}>
-        <img className={styles.ciSize} src={wpci} />
-        <span className={styles.ciText}>수온 알리미</span>
+        <img className={styles.ciSize} src={wpci} alt="waveparkLogo" />
       </div>
     </div>
   );

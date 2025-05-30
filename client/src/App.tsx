@@ -67,9 +67,8 @@ const App: React.FC = () => {
     { suitType: "보드숏", condition: "보류" },
     { suitType: "스프링", condition: "출격" },
     { suitType: "3/2", condition: "출격" },
-    { suitType: "3/2 기모", condition: "출격" },
-    { suitType: "4/3", condition: "출격" },
-    { suitType: "4/3 기모", condition: "불허" },
+    { suitType: "3/2기모", condition: "출격" },
+    { suitType: "4/3", condition: "불허" },
     { suitType: "5mm", condition: "불허" },
   ];
 
