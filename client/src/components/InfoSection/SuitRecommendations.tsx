@@ -10,11 +10,6 @@ interface SuitRecommendationsProps {
 const SuitRecommendations: React.FC<SuitRecommendationsProps> = ({
   recommendations,
 }) => {
-  const getConditionClass = (condition: string) => {
-    if (condition === "불허") return styles.notAllowed;
-    if (condition === "출격") return styles.allowed;
-    return "";
-  };
   /* 2025.05.27 장연주 추가 */
   const conditionColors = {
     출격: "#033E8C",
@@ -35,7 +30,7 @@ const SuitRecommendations: React.FC<SuitRecommendationsProps> = ({
           <tbody>
             {recommendations.map((item, index) => (
               <tr key={index}>
-                <td>{item.suitType}</td>
+                <td className={styles.suitTypeSmallText}>{item.suitType}</td>
                 <td
                   style={{
                     textAlign: "center",

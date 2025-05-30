@@ -189,3 +189,7 @@
   color: #ffc107;
   font-weight: bold;
 }
+
+.cTable td.suitTypeSmallText {
+  font-size: 13px;
+}
