@@ -1,23 +1,22 @@
 .header {
-    display: flex;
-    flex-direction: column; /* 기본 세로 정렬 */
-    align-items: center; /* 기본적으로 가로 정렬은 가운데 */
-    justify-content: space-between; /* 요소 간 공간 분배 */
-    text-align: center; 
-    height:50px; 
-    padding: 5px; 
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
-    position: relative; /* 날짜를 별도로 배치하기 위해 */
-    bottom: 20px; 
-  }
-  
-  .date {
-    position: absolute; /* 날짜를 헤더 오른쪽 상단으로 고정 */
-    top: auto; 
-    bottom: 10px; /* bottom을 20px에서 10px로 줄임 */
-    right: 10px; /* right를 20px에서 10px로 줄임 */
-    text-align: right; /* 텍스트 우측 정렬 */
-    font-size: 0.8rem; /* 0.9rem에서 0.8rem으로 줄임 */
-    color: #555; /* 날짜 텍스트 색상 */
-  }
-  
+  display: flex;
+  flex-direction: column; /* 기본 세로 정렬 */
+  align-items: center; /* 기본적으로 가로 정렬은 가운데 */
+  justify-content: space-between; /* 요소 간 공간 분배 */
+  text-align: center;
+  height: 50px;
+  padding: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative; /* 날짜를 별도로 배치하기 위해 */
+  bottom: 20px;
+}
+
+.date {
+  position: absolute; /* 날짜를 헤더 오른쪽 상단으로 고정 */
+  top: auto;
+  bottom: 10px; /* bottom을 20px에서 10px로 줄임 */
+  right: 10px; /* right를 20px에서 10px로 줄임 */
+  text-align: right; /* 텍스트 우측 정렬 */
+  font-size: 0.8rem; /* 0.9rem에서 0.8rem으로 줄임 */
+  color: #555; /* 날짜 텍스트 색상 */
+}

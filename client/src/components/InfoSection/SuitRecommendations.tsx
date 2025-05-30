@@ -1,6 +1,7 @@
 import React from "react";
 import { SuitRecommendation } from "../../types/types";
 import styles from "./InfoSection.module.css";
+import { Container, Row, Col, Card, Table } from "react-bootstrap"; // 장연주
 
 interface SuitRecommendationsProps {
   recommendations: SuitRecommendation[];
@@ -14,29 +15,44 @@ const SuitRecommendations: React.FC<SuitRecommendationsProps> = ({
     if (condition === "출격") return styles.allowed;
     return "";
   };
+  /* 2025.05.27 장연주 추가 */
+  const conditionColors = {
+    출격: "#033E8C",
+    불허: "#D90404",
+    보류: "#ebb000", //#555555 고민 중중
+  };
 
   return (
-    <div className={styles.suitContainer}>
-      <table className={styles.suitTable}>
-        <thead>
-          <tr>
-            <th colSpan={2} className={styles.header}>
-              슈트 추천
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {recommendations.map((item, index) => (
-            <tr key={index}>
-              <td>{item.suitType}</td>
-              <td className={getConditionClass(item.condition)}>
-                {item.condition}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <Card className={`mb-3 ${styles.suitCard}`}>
+      <Card.Body>
+        <Card.Title className={styles.tempTitle}>슈트 추천</Card.Title>
+        <Table className={styles.cTable}>
+          <colgroup>
+            <col style={{ width: "30%" }} />
+            <col style={{ width: "70%" }} />
+          </colgroup>
+
+          <tbody>
+            {recommendations.map((item, index) => (
+              <tr key={index}>
+                <td>{item.suitType}</td>
+                <td
+                  style={{
+                    textAlign: "center",
+                    color:
+                      conditionColors[
+                        item.condition as keyof typeof conditionColors
+                      ] || "black",
+                  }}
+                >
+                  {item.condition}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Card.Body>
+    </Card>
   );
 };
 

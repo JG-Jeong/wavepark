@@ -1,0 +1,67 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px; /* 최대 너비 제한 */
+  margin: 0 auto;
+}
+
+.weekSuitRecommendation {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 20px;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.infoSection {
+  flex: 0 0 30%;
+  min-width: 280px;
+  max-width: 350px;
+}
+
+.schedule {
+  flex: 0 0 70%;
+  min-width: 400px;
+  max-width: none;
+}
+
+/* 웹 화면에서의 레이아웃 */
+@media (max-width: 768px) {
+  .layout {
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .contentContainer {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .infoSection, .schedule {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+.denied {
+  color: #dc3545;
+}
+
+.allowed {
+  color: #28a745;
+}
+
+.conditional {
+  color: #ffc107;
+}
+

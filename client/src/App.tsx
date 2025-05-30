@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "./styles/global.css";
 import styles from "./Layout.module.css";
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css"; //2025.05.27. 장연주 추가
 
 //Components
 import ReservationViewer from "./components/LiveReservationTable/LiveReservation";
 import Header from "./components/Header/Header";
 import InfoSection from "./components/InfoSection/InfoSection";
-import Schedule from "./components/Schedule/Schedule";
 import Tab from "./components/Tab/Tab";
 import { Temperature } from "./types/types";
 
@@ -25,6 +24,15 @@ const App: React.FC = () => {
   );
   const [error, setError] = useState<string | null>(null);
 
+  // 수온에 따라 왁스 추천 - 장연주
+  const getWax = (waterTemp: number | null): string => {
+    if (waterTemp === null) return "-";
+    if (waterTemp <= 15) return "COLD";
+    if (waterTemp > 15 && waterTemp <= 20) return "COOL";
+    if (waterTemp > 20 && waterTemp <= 24) return "WARM";
+    return "TROPIC";
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -33,13 +41,14 @@ const App: React.FC = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const apiData: ApiResponse = await response.json();
+
         // 하드코딩된 날씨와 추천 왁스
         const data: Temperature = {
           temperature: apiData.temperature,
           humidity: apiData.humidity,
-          water_temperature: apiData.water_temperature,
+          water_temperature: parseFloat(apiData.water_temperature.toFixed(1)),
           weather: "맑음", // 매일 수동 업데이트
-          recommendedWax: "WARM", // 매일 수동 업데이트
+          recommendedWax: getWax(apiData.water_temperature), // water_temperature에 따른 왁스 종류 결정 - 장연주
         };
         setTemperatureData(data);
       } catch (err) {
@@ -67,7 +76,7 @@ const App: React.FC = () => {
   const formatSession = (session: string) => {
     if (session.includes("(")) {
       const [main, sub] = session.split(" (");
-      return `${main}<br />(${sub}`;
+      return `${main}\n(${sub}`;
     }
     return session;
   };
@@ -79,7 +88,7 @@ const App: React.FC = () => {
       session2: formatSession("상급세션 (M4, T1)"),
     },
     {
-      session1: formatSession("Lv.4 라인업레슨"),
+      session1: formatSession("Lv.4\n라인업레슨"),
       time: "11:00\n ~12:00",
       session2: formatSession("초급세션 (M1, M2)"),
     },
@@ -89,7 +98,7 @@ const App: React.FC = () => {
       session2: formatSession("중급세션 (M3, M4)"),
     },
     {
-      session1: formatSession("Lv.5 턴기초레슨"),
+      session1: formatSession("Lv.5\n턴기초레슨"),
       time: "13:00\n ~14:00",
       session2: formatSession("초급세션 (M1, M2)"),
     },
@@ -119,10 +128,6 @@ const App: React.FC = () => {
     return <div>Error: {error}</div>;
   }
 
-  if (!temperatureData) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div>
       <Header />
@@ -133,8 +138,8 @@ const App: React.FC = () => {
             <InfoSection
               temperature={temperatureData}
               recommendations={recommendations}
+              schedule={schedule}
             />
-            <Schedule schedule={schedule} />
           </div>
         ) : (
           <ReservationViewer />

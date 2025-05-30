@@ -1,119 +1,177 @@
-.infoSection {
-  width: fit-content;
+/* 장연주 전체 수정 */
+.containerWrap {
+  display: block;
+  justify-content: center;
+  padding-left: 5px;
+  padding-right: 10px;
+}
+
+.cardRow {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 20px;
-  padding: 6px;
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-top: 5px;
-}
-
-.tables {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch; /*카드뷰 양쪽 높이 동일하게*/
+  gap: 16px;
   width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-.table {
+.cardColLeft {
+  flex: 0 0 15%;
+  min-width: 100px;
+}
+
+.cardColRight {
+  width: 85%;
+  min-width: 250px;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.fullCardRow {
+  display: block;
   width: 100%;
-  border-collapse: collapse;
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
+  max-width: 1000px;
+  margin: 16px auto 0 auto;
 }
 
-.table th,
-.table td {
-  padding: 12px;
+.tempCard {
+  background-color: #05c7f2;
+  color: white;
+  border-radius: 7px; /*15*/
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.suitCard {
+  background-color: #f7f4ed;
+  color: #404040;
+  border-radius: 7px;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.scheduleCard {
+  background-color: #f2f2f2;
+  color: #404040;
+  border-radius: 7px;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.tempTitle {
   text-align: center;
-  border-bottom: 1px solid #e0e0e0;
+  font-weight: bolder;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  padding-bottom: 5px;
 }
 
-.table th {
-  background-color: #f0f0f0;
-  font-weight: 600;
+.tempContents {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 85%;
 }
 
-.table tr:last-child td {
+.logoSize {
+  object-fit: contain;
+  width: 60px;
+  height: 60px;
+  display: block;
+}
+
+.cText {
+  text-align: center;
+  font-weight: bold;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: large;
+  margin: 0;
+  line-height: 1.2;
+  padding: 0;
+}
+
+.cTable {
+  font-size: 13px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: transparent; /* 배경 투명 */
+  border-collapse: collapse;
+  width: 95%;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.cTable th {
+  font-size: 15px;
+  vertical-align: middle;
+  background-color: transparent;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 4px;
+}
+
+.cTable td {
+  font-size: 15px;
+  vertical-align: middle;
+  background-color: transparent;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  white-space: pre-line; /*줄바꿈 설정*/
+  text-align: center;
+}
+
+.cTable td,
+.cTable th {
+  border-bottom: 1px solid #404040; /* 내부 격자선 */
+  border-right: 1px solid #404040;
+}
+
+.cTable td:last-child,
+.cTable th:last-child {
+  border-right: none;
+}
+
+.cTable tr:last-child td {
   border-bottom: none;
 }
 
-.suitContainer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 2px 0;
-  table-layout: fixed;
-  font-size: 0.8em;
-}
-
-th,
-td {
-  border: 1px solid #ddd;
-  padding: 2px 3px;
-  text-align: center;
-  font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 0.85em;
-  letter-spacing: -0.5px;
-}
-
-.header {
-  font-size: 0.9em;
-  font-weight: bold;
-  text-align: center;
-  padding: 3px;
-  background-color: #f4f4f4;
-  border-bottom: 1px solid #ddd;
-}
-
-.suitTable th:first-child,
-.suitTable td:first-child {
-  width: 50%;
-}
-
-th {
-  background-color: #f4f4f4;
-}
-
-.suitRecommendations {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
-
 @media (max-width: 768px) {
-  .infoSection {
-    padding: 15px;
-    gap: 15px;
+  .containerWrap {
+    display: block;
+    justify-content: center;
   }
 
-  .tables {
-    gap: 15px;
+  .fullCardRow {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 16px;
   }
 
-  .table th,
-  .table td {
-    padding: 10px;
+  .cTable {
+    width: 95%;
+    margin: 0 auto;
   }
 
-  table {
-    font-size: 0.75em;
+  .tempTitle {
+    font-size: 20px;
+  }
+
+  .tempCard {
+    max-width: 100px;
+  }
+
+  .suitCard {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 100%;
   }
 }
 

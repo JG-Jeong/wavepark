@@ -1,29 +1,37 @@
 import React from "react";
+import { Container, Row, Col, Card, Table } from "react-bootstrap"; //장연주
 import styles from "./InfoSection.module.css";
 import { Temperature } from "../../types/types";
+import tempLogo from "../../styles/watertempLogo.png"; //장연주
+import { getWeatherImage } from "./WeatherInfo"; //장연주주
 
 interface TemperatureInfoProps {
-  data: Temperature;
+  data: Temperature | null;
 }
 
-const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
-  // 날씨에 따라 데이터를 넣고 이모지도 넣는 함수
-  const getWeatherEmoji = (weather: string) => {
-    const weatherLower = weather.toLowerCase();
-    if (weatherLower.includes("맑음") || weatherLower.includes("clear"))
-      return "☀️맑음";
-    if (weatherLower.includes("구름") || weatherLower.includes("cloud"))
-      return "☁️구름";
-    if (weatherLower.includes("비") || weatherLower.includes("rain"))
-      return "🌧️비";
-    if (weatherLower.includes("눈") || weatherLower.includes("snow"))
-      return "❄️눈";
-    if (weatherLower.includes("흐림") || weatherLower.includes("cloud"))
-      return "🌤️흐림";
-    return "";
-  };
+// 현재 날짜 가져오기 - 장연주
+const today = new Date();
+const formattedDate = `${String(today.getMonth() + 1).padStart(
+  2,
+  "0"
+)}/${String(today.getDate()).padStart(2, "0")}`;
 
-  // 날씨에 따라 왁스 추천
+const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
+  /* 날씨에 따라 데이터를 넣고 이모지도 넣는 함수 - 날씨 맞춤 이미지로 변경경 - 장연주
+  const getWeatherImage = (weather: string): string => {
+    const weatherLower = weather?.toLowerCase();
+
+    const imageMap: Record<WeatherType | string, string> = {
+      맑음: '../../styles/sunny.png',
+      구름많음: '../../styles/suncloudy.png',
+      흐림: "../../styles/overcast_cloud.png",
+      비: '../../styles/heavy_rain.png',
+      눈: '../../styles/snow_cloud.png'
+    };
+    return imageMap[weatherLower] ?? sunnyImg;
+  };*/
+
+  // 날씨에 따라 왁스 추천 - 사용 안함 - 장연주
   const getWaxEmoji = (wax: string) => {
     switch (wax) {
       case "COOL":
@@ -39,33 +47,48 @@ const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
     }
   };
 
+  //null check: API 수신 전 null인 경우 '-'로 표기
+  const getDisplayValue = (
+    value: number | string | null | undefined,
+    unit: string = ""
+  ) => {
+    return value !== undefined && value !== null ? `${value}${unit}` : "-";
+  };
+
   return (
-    <table className={styles.table}>
-      <tbody>
-        <tr>
-          <td>날씨</td>
-          <td>{getWeatherEmoji(data.weather)}</td>
-        </tr>
-        <tr>
-          <td>기온</td>
-          <td>{data.temperature.toFixed(1)}°C</td>
-        </tr>
-        <tr>
-          <td>수온</td>
-          <td>{data.water_temperature.toFixed(1)}°C</td>
-        </tr>
-        <tr>
-          <td>습도</td>
-          <td>{data.humidity.toFixed(1)}%</td>
-        </tr>
-        <tr>
-          <td>추천왁스</td>
-          <td>
-            {getWaxEmoji(data.recommendedWax)} {data.recommendedWax}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <Card className={`mb-3 text-white ${styles.tempCard}`}>
+      <Card.Body>
+        <Card.Title className={styles.tempTitle}>{formattedDate}</Card.Title>
+        <Row className={`text-center mt-1 ${styles.tempContents}`}>
+          <Col className="d-flex justify-content-center align-items-center">
+            <img className={styles.logoSize} src={tempLogo} />
+          </Col>
+          <Col>
+            <div className={styles.cText}>
+              {getDisplayValue(data?.recommendedWax)}
+            </div>
+            <div className={styles.cText}>
+              {getDisplayValue(data?.water_temperature, "℃")}
+            </div>
+            <div className={styles.cText}>
+              {getDisplayValue(data?.humidity, "%")}
+            </div>
+          </Col>
+          <Col className="d-flex justify-content-center align-items-center">
+            <img
+              className={styles.logoSize}
+              src={getWeatherImage(data?.weather ?? "")}
+            />
+          </Col>
+          <Col>
+            <div className={styles.cText}>{getDisplayValue(data?.weather)}</div>
+            <div className={styles.cText}>
+              {getDisplayValue(data?.temperature, "℃")}
+            </div>
+          </Col>
+        </Row>
+      </Card.Body>
+    </Card>
   );
 };
 
