@@ -1,6 +1,8 @@
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
+import { Container, Table, Form, Alert } from "react-bootstrap";
 import { ReservationItem, ReservationResponse } from "./types";
+import styles from "./LiveReservation.module.css";
 
 const lambda_api_url = process.env.REACT_APP_LAMBDA_API_URL;
 
@@ -71,15 +73,15 @@ export default function ReservationViewer() {
   );
 
   return (
-    <div>
-      <header>
+    <Container className={styles.container}>
+      <header className={styles.header}>
         <h1>웨이브파크 예약현황</h1>
       </header>
 
       <main>
-        <label>
-          날짜 선택:{" "}
-          <input
+        <div className={styles.dateSelector}>
+          <Form.Label>날짜 선택:</Form.Label>
+          <Form.Control
             type="date"
             value={format(selectedDate, "yyyy-MM-dd")}
             onChange={(e) => {
@@ -88,16 +90,18 @@ export default function ReservationViewer() {
               setSelectedDate(d);
             }}
           />
-        </label>
-        <div>남은자리/총자리수 입니다.</div>
+        </div>
+        <div className={styles.infoText}>남은자리/총자리수 입니다.</div>
 
-        {loading && <p>불러오는 중…</p>}
+        {loading && <div className={styles.loading}>불러오는 중…</div>}
         {error && (
-          <p style={{ color: "red" }}>과거의 데이터는 불러올 수 없습니다.</p>
+          <Alert variant="danger" className={styles.error}>
+            과거의 데이터는 불러올 수 없습니다.
+          </Alert>
         )}
 
         {!loading && !error && (
-          <table>
+          <Table className={styles.reservationTable} bordered hover>
             <thead>
               <tr>
                 <th>시간</th>
@@ -107,60 +111,22 @@ export default function ReservationViewer() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>{grouped[0]?.시간.split(" ")[1].slice(0, 5)}</td>
-                <td>{grouped[0]?.세션} (M4,T1) </td>
-                <td>{grouped[0]?.left}</td>
-                <td>{grouped[0]?.right}</td>
-              </tr>
-              <tr>
-                <td>{grouped[1]?.시간.split(" ")[1].slice(0, 5)}</td>
-                <td>{grouped[1]?.세션} (M1e,M2e) </td>
-                <td>{grouped[1]?.left}</td>
-                <td>{grouped[1]?.right}</td>
-              </tr>
-              <tr>
-                <td>{grouped[2]?.시간.split(" ")[1].slice(0, 5)}</td>
-                <td>{grouped[2]?.세션} (M3,M4) </td>
-                <td>{grouped[2]?.left}</td>
-                <td>{grouped[2]?.right}</td>
-              </tr>{" "}
-              <tr>
-                <td>{grouped[3]?.시간.split(" ")[1].slice(0, 5)}</td>
-                <td>{grouped[3]?.세션} (M1,M2) </td>
-                <td>{grouped[3]?.left}</td>
-                <td>{grouped[3]?.right}</td>
-              </tr>
-              <tr>
-                <td>{grouped[4]?.시간.split(" ")[1].slice(0, 5)}</td>
-                <td>{grouped[4]?.세션} (M4) </td>
-                <td>{grouped[4]?.left}</td>
-                <td>{grouped[4]?.right}</td>
-              </tr>
-              <tr>
-                <td>{grouped[5]?.시간.split(" ")[1].slice(0, 5)}</td>
-                <td>{grouped[5]?.세션} (M2, M3) </td>
-                <td>{grouped[5]?.left}</td>
-                <td>{grouped[5]?.right}</td>
-              </tr>
-              <tr>
-                <td>{grouped[6]?.시간.split(" ")[1].slice(0, 5)}</td>
-                <td>{grouped[6]?.세션} (T1, T2) </td>
-                <td>{grouped[6]?.left}</td>
-                <td>{grouped[6]?.right}</td>
-              </tr>
-              <tr>
-                <td>{grouped[7]?.시간.split(" ")[1].slice(0, 5)}</td>
-                <td>{grouped[7]?.세션} (M2,M3,M4) </td>
-                <td>{grouped[7]?.left}</td>
-                <td>{grouped[7]?.right}</td>
-              </tr>
+              {grouped.map((item, index) => (
+                <tr key={index}>
+                  <td>{item?.시간.split(" ")[1].slice(0, 5)}</td>
+                  <td>
+                    {item?.세션} {getSessionInfo(index)}
+                  </td>
+                  <td>{item?.left}</td>
+                  <td>{item?.right}</td>
+                </tr>
+              ))}
             </tbody>
-          </table>
+          </Table>
         )}
       </main>
 
-      <footer>
+      <footer className={styles.footer}>
         <small>
           ※ 실제 예약은{" "}
           <a
@@ -173,6 +139,20 @@ export default function ReservationViewer() {
           에서 해주세요.
         </small>
       </footer>
-    </div>
+    </Container>
   );
+}
+
+function getSessionInfo(index: number): string {
+  const sessionInfo = [
+    "(M4,T1)",
+    "(M1e,M2e)",
+    "(M3,M4)",
+    "(M1,M2)",
+    "(M4)",
+    "(M2, M3)",
+    "(T1, T2)",
+    "(M2,M3,M4)",
+  ];
+  return sessionInfo[index] || "";
 }

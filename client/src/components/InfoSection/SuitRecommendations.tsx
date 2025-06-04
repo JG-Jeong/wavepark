@@ -1,7 +1,7 @@
 import React from "react";
 import { SuitRecommendation } from "../../types/types";
 import styles from "./InfoSection.module.css";
-import { Container, Row, Col, Card, Table } from "react-bootstrap"; // 장연주
+import { Card, Table } from "react-bootstrap"; // 장연주
 
 interface SuitRecommendationsProps {
   recommendations: SuitRecommendation[];

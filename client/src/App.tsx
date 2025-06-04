@@ -36,7 +36,8 @@ const App: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(process.env.REACT_APP_WATER_API_URL!);
+        console.log(process.env.REACT_APP_WATER_API_URL);
+        const response = await fetch(process.env.REACT_APP_WATER_API_URL!!);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
