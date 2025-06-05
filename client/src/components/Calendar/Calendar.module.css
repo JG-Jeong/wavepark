@@ -1,0 +1,58 @@
+.scheduleCard {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.tempTitle {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.cTable {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.cTable th,
+.cTable td {
+  text-align: center;
+  vertical-align: top;
+  padding: 4px;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.cTable th {
+  font-weight: bold;
+}
+
+.cTable td div {
+  margin-bottom: 2px;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  .scheduleCard {
+    padding: 8px;
+  }
+
+  .tempTitle {
+    font-size: 20px;
+  }
+
+  .cTable {
+    font-size: 10px;
+  }
+
+  .cTable th,
+  .cTable td {
+    padding: 3px;
+  }
+
+  .cTable th:not(:first-child):not(:last-child) {
+    font-size: 12px;
+  }
+}
