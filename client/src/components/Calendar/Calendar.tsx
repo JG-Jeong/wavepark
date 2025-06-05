@@ -78,7 +78,7 @@ const Calendar = () => {
                 <td style={{ width: "12%", padding: "3px" }}>
                   <div style={{ color: "blue" }}>7</div>
                   <div>중급세션</div>
-                  <div style={{ fontSize: "9px" }}>M3(f),M4(f)</div>
+                  <div style={{ fontSize: "7px" }}>M3f,M4f</div>
                 </td>
               </tr>
               {/* Week 2 */}
@@ -97,19 +97,19 @@ const Calendar = () => {
                 <td style={{ width: "12%", padding: "3px" }}>
                   <div>10</div>
                   <div>중급세션</div>
-                  <div style={{ fontSize: "9px" }}>M2,M3,M4</div>
+                  <div style={{ fontSize: "7px" }}>M2,M3,M4</div>
                   <div style={{ fontSize: "9px" }}>60CAPA</div>
                 </td>
                 <td style={{ width: "12%", padding: "3px" }}>
                   <div>11</div>
                   <div>초급세션</div>
-                  <div style={{ fontSize: "9px" }}>M1,M2,M3</div>
+                  <div style={{ fontSize: "7px" }}>M1,M2,M3</div>
                   <div style={{ fontSize: "9px" }}>60CAPA</div>
                 </td>
                 <td style={{ width: "12%", padding: "3px" }}>
                   <div>12</div>
                   <div>중급세션</div>
-                  <div style={{ fontSize: "9px" }}>M3(f),M4(f)</div>
+                  <div style={{ fontSize: "7px" }}>M3f,M4f</div>
                   <div style={{ fontSize: "9px" }}>60CAPA</div>
                 </td>
                 <td style={{ width: "12%", padding: "3px" }}>
@@ -134,13 +134,13 @@ const Calendar = () => {
                 <td style={{ width: "12%", padding: "3px" }}>
                   <div>16</div>
                   <div>중급세션</div>
-                  <div style={{ fontSize: "9px" }}>M2,M3,M4</div>
+                  <div style={{ fontSize: "7px" }}>M2,M3,M4</div>
                   <div style={{ fontSize: "9px" }}>60CAPA</div>
                 </td>
                 <td style={{ width: "12%", padding: "3px" }}>
                   <div>17</div>
                   <div>중급세션</div>
-                  <div style={{ fontSize: "9px" }}>M2(e),M3(e)</div>
+                  <div style={{ fontSize: "7px" }}>M2e,M3e</div>
                   <div style={{ fontSize: "9px" }}>60CAPA</div>
                 </td>
                 <td style={{ width: "12%", padding: "3px" }}>
@@ -164,7 +164,7 @@ const Calendar = () => {
                 <td style={{ width: "12%", padding: "3px" }}>
                   <div style={{ color: "blue" }}>21</div>
                   <div>중급세션</div>
-                  <div style={{ fontSize: "9px" }}>M2,M3,M4</div>
+                  <div style={{ fontSize: "7px" }}>M2,M3,M4</div>
                 </td>
               </tr>
               {/* Week 4 */}
@@ -189,7 +189,7 @@ const Calendar = () => {
                 <td style={{ width: "12%", padding: "3px" }}>
                   <div>25</div>
                   <div>초급세션</div>
-                  <div style={{ fontSize: "9px" }}>M1,M2,M3</div>
+                  <div style={{ fontSize: "7px" }}>M1,M2,M3</div>
                   <div style={{ fontSize: "9px" }}>60CAPA</div>
                 </td>
                 <td style={{ width: "12%", padding: "3px" }}>
@@ -201,26 +201,26 @@ const Calendar = () => {
                 <td style={{ width: "12%", padding: "3px" }}>
                   <div>27</div>
                   <div>중급세션</div>
-                  <div style={{ fontSize: "9px" }}>M2,M3,M4(e)</div>
+                  <div style={{ fontSize: "7px" }}>M2,M3,M4e</div>
                   <div style={{ fontSize: "9px" }}>60CAPA</div>
                 </td>
                 <td style={{ width: "12%", padding: "3px" }}>
                   <div style={{ color: "blue" }}>28</div>
                   <div>중급세션</div>
-                  <div style={{ fontSize: "9px" }}>M3,M4(L)</div>
+                  <div style={{ fontSize: "9px" }}>M3,M4L</div>
                 </td>
               </tr>
               {/* Week 5 */}
               <tr>
                 <td style={{ width: "12%", padding: "3px" }}>
                   <div style={{ color: "red" }}>29</div>
-                  <div>초급세션</div>
+                  <div>상급세션</div>
                   <div style={{ fontSize: "9px" }}>M4,T1</div>
                 </td>
                 <td style={{ width: "12%", padding: "3px" }}>
                   <div>30</div>
                   <div>중급세션</div>
-                  <div style={{ fontSize: "9px" }}>M2,M3,M4</div>
+                  <div style={{ fontSize: "7px" }}>M2,M3,M4</div>
                   <div style={{ fontSize: "9px" }}>60CAPA</div>
                 </td>
                 <td style={{ width: "60%", padding: "3px" }} colSpan={5}></td>
@@ -232,13 +232,13 @@ const Calendar = () => {
                 <td style={{ width: "12%", padding: "3px" }}>
                   <div>1</div>
                   <div>중급세션</div>
-                  <div style={{ fontSize: "9px" }}>M3,M4(L)</div>
+                  <div style={{ fontSize: "9px" }}>M3,M4L</div>
                   <div style={{ fontSize: "9px" }}>60CAPA</div>
                 </td>
                 <td style={{ width: "12%", padding: "3px" }}>
                   <div>2</div>
                   <div>중급세션</div>
-                  <div style={{ fontSize: "9px" }}>M3,M4,T1(e)</div>
+                  <div style={{ fontSize: "7px" }}>M3,M4,T1e</div>
                   <div style={{ fontSize: "9px" }}>60CAPA</div>
                 </td>
                 <td style={{ width: "12%", padding: "3px" }}>
@@ -250,7 +250,7 @@ const Calendar = () => {
                 <td style={{ width: "12%", padding: "3px" }}>
                   <div>4</div>
                   <div>중급세션</div>
-                  <div style={{ fontSize: "9px" }}>M2,M3,M4(L)</div>
+                  <div style={{ fontSize: "7px" }}>M2,M3,M4L</div>
                   <div style={{ fontSize: "9px" }}>60CAPA</div>
                 </td>
                 <td style={{ width: "12%", padding: "3px" }}></td>
