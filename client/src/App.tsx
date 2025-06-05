@@ -8,6 +8,7 @@ import ReservationViewer from "./components/LiveReservationTable/LiveReservation
 import Header from "./components/Header/Header";
 import InfoSection from "./components/InfoSection/InfoSection";
 import Tab from "./components/Tab/Tab";
+import Calendar from "./components/Calendar/Calendar";
 import { Temperature } from "./types/types";
 
 interface ApiResponse {
@@ -18,7 +19,9 @@ interface ApiResponse {
 }
 
 const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<"today" | "reservation">("today");
+  const [activeTab, setActiveTab] = useState<
+    "today" | "reservation" | "calendar"
+  >("today");
   const [temperatureData, setTemperatureData] = useState<Temperature | null>(
     null
   );
@@ -141,8 +144,10 @@ const App: React.FC = () => {
               schedule={schedule}
             />
           </div>
-        ) : (
+        ) : activeTab === "reservation" ? (
           <ReservationViewer />
+        ) : (
+          <Calendar />
         )}
       </div>
     </div>
