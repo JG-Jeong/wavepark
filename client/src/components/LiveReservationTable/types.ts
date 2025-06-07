@@ -1,7 +1,7 @@
 export interface ReservationItem {
   시간: string;
   세션: string;
-  방향: "좌" | "우";
+  방향: "좌" | "우" | "구분없음";
   남은좌석: string;
 }
 

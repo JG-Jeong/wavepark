@@ -7,19 +7,6 @@ interface ScheduleTableProps {
   schedule: ScheduleItem[];
 }
 
-// 미사용 - 장연주
-// const getSessionClass = (session: string) => {
-//   if (session.includes("상급세션")) return styles.advancedSession;
-//   if (session.includes("중급세션")) return styles.intermediateSession;
-//   if (session.includes("초급세션")) return styles.beginnerSession;
-//   if (
-//     session.includes("Lv.4 라인업레슨") ||
-//     session.includes("Lv.5 턴기초레슨")
-//   )
-//     return styles.lineupLesson;
-//   return "";
-// };
-
 //App.tsx에서 값 호출 시 \n에 태그 부여 - 장연주
 const formatTextBreak = (text: string): React.ReactNode[] => {
   const lines = text.split("\n");

@@ -9,7 +9,12 @@ import Header from "./components/Header/Header";
 import InfoSection from "./components/InfoSection/InfoSection";
 import Tab from "./components/Tab/Tab";
 import Calendar from "./components/Calendar/Calendar";
-import { Temperature } from "./types/types";
+import {
+  ReservationResponse,
+  Temperature,
+  ReservationItem,
+} from "./types/types";
+import { format } from "date-fns";
 
 interface ApiResponse {
   temperature: number;
@@ -17,6 +22,8 @@ interface ApiResponse {
   water_temperature: number;
   timestamp: string;
 }
+
+const lambda_api_url = process.env.REACT_APP_LAMBDA_API_URL;
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<
@@ -26,6 +33,10 @@ const App: React.FC = () => {
     null
   );
   const [error, setError] = useState<string | null>(null);
+  const [reservationData, setReservationData] = useState<ReservationItem[]>([]);
+  const [reservationDate, setReservationDate] = useState<string>(
+    format(new Date(), "yyyy-MM-dd")
+  );
 
   // 수온에 따라 왁스 추천 - 장연주
   const getWax = (waterTemp: number | null): string => {
@@ -36,10 +47,30 @@ const App: React.FC = () => {
     return "TROPIC";
   };
 
+  // 초기 예약 데이터 로드
+  useEffect(() => {
+    const fetchReservationData = async () => {
+      try {
+        const dateStr = reservationDate;
+        const res = await fetch(`${lambda_api_url}/reservation/${dateStr}`);
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}`);
+        }
+        const json: ReservationResponse = await res.json();
+        setReservationData(json.data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Unknown error");
+        setReservationData([]);
+      }
+    };
+
+    fetchReservationData();
+  }, [reservationDate]);
+
+  // 수온 데이터 로드
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(process.env.REACT_APP_WATER_API_URL);
         const response = await fetch(process.env.REACT_APP_WATER_API_URL!!);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -68,10 +99,10 @@ const App: React.FC = () => {
   }, []);
 
   const recommendations = [
-    { suitType: "보드숏", condition: "보류" },
+    { suitType: "보드숏", condition: "출격" },
     { suitType: "스프링", condition: "출격" },
     { suitType: "3/2", condition: "출격" },
-    { suitType: "3/2기모", condition: "출격" },
+    { suitType: "3/2기모", condition: "춥찔이" },
     { suitType: "4/3", condition: "불허" },
     { suitType: "5mm", condition: "불허" },
   ];
@@ -131,6 +162,26 @@ const App: React.FC = () => {
     return <div>Error: {error}</div>;
   }
 
+  // 예약 데이터 갱신 함수
+  const updateReservationData = async (dateStr: string) => {
+    try {
+      const res = await fetch(`${lambda_api_url}/reservation/${dateStr}`);
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+      const json: ReservationResponse = await res.json();
+      setReservationData(json.data);
+      setReservationDate(dateStr);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unknown error");
+      setReservationData([]);
+    }
+  };
+
+  if (error && !reservationData.length && !temperatureData) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div>
       <Header />
@@ -145,7 +196,11 @@ const App: React.FC = () => {
             />
           </div>
         ) : activeTab === "reservation" ? (
-          <ReservationViewer />
+          <ReservationViewer
+            initialData={reservationData}
+            initialDate={reservationDate}
+            updateData={updateReservationData}
+          />
         ) : (
           <Calendar />
         )}

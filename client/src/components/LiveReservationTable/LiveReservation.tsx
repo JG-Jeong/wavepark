@@ -4,73 +4,118 @@ import { Container, Table, Form, Alert } from "react-bootstrap";
 import { ReservationItem, ReservationResponse } from "./types";
 import styles from "./LiveReservation.module.css";
 
-const lambda_api_url = process.env.REACT_APP_LAMBDA_API_URL;
+const WEEKEND_DATES = [
+  "2025-06-07",
+  "2025-06-08",
+  "2025-06-14",
+  "2025-06-15",
+  "2025-06-21",
+  "2025-06-22",
+  "2025-06-28",
+  "2025-06-29",
+];
 
-// Reservation 데이터를 좌,우 를 그룹화 하는 타입
+interface ReservationViewerProps {
+  initialData: ReservationItem[];
+  initialDate: string;
+  updateData: (dateStr: string) => Promise<void>;
+}
+
 interface GroupedReservation {
   시간: string;
   세션: string;
   left: string;
   right: string;
+  night?: string;
 }
 
-export default function ReservationViewer() {
-  // 예약 데이터
-  const [reservations, setReservations] = useState<ReservationItem[]>([]);
+export default function ReservationViewer({
+  initialData,
+  initialDate,
+  updateData,
+}: ReservationViewerProps) {
+  const [reservations, setReservations] =
+    useState<ReservationItem[]>(initialData);
   const [selectedDate, setSelectedDate] = useState<Date>(() => {
-    const d = new Date();
+    const d = new Date(initialDate);
     d.setHours(0, 0, 0, 0);
     return d;
   });
-
-  // 로딩시 동글뱅이 돌리려는 useState
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function load() {
-      setLoading(true);
-      setError(null);
-      const dateStr = format(selectedDate, "yyyy-MM-dd");
+    setReservations(initialData);
+    setError(null);
+  }, [initialData]);
 
-      try {
-        const res = await fetch(`${lambda_api_url}/reservation/${dateStr}`);
-        if (!res.ok) {
-          throw new Error(`HTTP ${res.status}`);
+  useEffect(() => {
+    const dateStr = format(selectedDate, "yyyy-MM-dd");
+    if (dateStr !== initialDate) {
+      const load = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+          await updateData(dateStr);
+        } catch (e: any) {
+          setError("과거의 데이터는 불러올 수 없습니다.");
+          setReservations([]);
+        } finally {
+          setLoading(false);
         }
-        const json: ReservationResponse = await res.json();
-        setReservations(json.data);
-      } catch (e: any) {
-        setError(e.message);
-        setReservations([]);
-      } finally {
-        setLoading(false);
-      }
+      };
+      load();
     }
+  }, [selectedDate, initialDate, updateData]);
 
-    load();
-  }, [selectedDate]);
-
-  // 시간+세션 키로 좌/우를 합치는 로직
   const grouped: GroupedReservation[] = reservations.reduce(
     (acc, { 시간, 세션, 방향, 남은좌석 }) => {
-      // 이미 같은 시간·세션을 담은 객체가 있나 찾아보고…
-      let entry = acc.find((e) => e.시간 === 시간 && e.세션 === 세션);
+      const timeOnly = 시간.split(" ")[1].slice(0, 5);
+      const isNightSession = timeOnly.startsWith("18:00");
+      const dateStr = format(selectedDate, "yyyy-MM-dd");
+      const isWeekend = WEEKEND_DATES.includes(dateStr);
+
+      // 18:00 세션의 "알 수 없음" 처리
+      let mappedSession = 세션;
+      if (isNightSession && 세션 === "알 수 없음" && isWeekend) {
+        const sessionType = weekendSessionMap[dateStr]?.["초급"]
+          ? "초급"
+          : "중급";
+        mappedSession = `나이트 ${sessionType}`;
+      } else if (isNightSession) {
+        mappedSession = `나이트 ${세션}`;
+      }
+
+      let entry = acc.find(
+        (e) =>
+          e.시간 === (isNightSession ? "18:00~22:00" : timeOnly) &&
+          e.세션 === (isNightSession ? mappedSession : 세션)
+      );
+
       if (!entry) {
-        entry = { 시간, 세션, left: "-", right: "-" };
+        entry = {
+          시간: isNightSession ? "18:00~22:00" : timeOnly,
+          세션: isNightSession ? mappedSession : 세션,
+          left: "-",
+          right: "-",
+          night: isNightSession ? `${남은좌석}/60` : undefined,
+        };
         acc.push(entry);
       }
-      // 상급이면 17, 아니면 25
+
       const capacity = 세션 === "상급" ? 17 : 25;
 
-      // 방향에 따라 left/right 채우기
-      if (방향 === "좌") entry.left = `${남은좌석}/${capacity}`;
-      else if (방향 === "우") entry.right = `${남은좌석}/${capacity}`;
+      if (!isNightSession) {
+        if (방향 === "좌") entry.left = `${남은좌석}/${capacity}`;
+        else if (방향 === "우") entry.right = `${남은좌석}/${capacity}`;
+      }
 
       return acc;
     },
     [] as GroupedReservation[]
   );
+
+  const isWeekend = WEEKEND_DATES.includes(format(selectedDate, "yyyy-MM-dd"));
 
   return (
     <Container className={styles.container}>
@@ -96,29 +141,37 @@ export default function ReservationViewer() {
         {loading && <div className={styles.loading}>불러오는 중…</div>}
         {error && (
           <Alert variant="danger" className={styles.error}>
-            과거의 데이터는 불러올 수 없습니다.
+            {error}
           </Alert>
         )}
 
-        {!loading && !error && (
+        {!loading && (
           <Table className={styles.reservationTable} bordered hover>
             <thead>
               <tr>
                 <th>시간</th>
                 <th>세션</th>
-                <th>좌코브</th>
-                <th>우코브</th>
+                <th>좌</th>
+                <th>우</th>
               </tr>
             </thead>
             <tbody>
-              {grouped.map((item, index) => (
-                <tr key={index}>
-                  <td>{item?.시간.split(" ")[1].slice(0, 5)}</td>
+              {grouped.map((item) => (
+                <tr key={`${item.시간}-${item.세션}`}>
+                  <td>{item.시간}</td>
                   <td>
-                    {item?.세션} {getSessionInfo(index)}
+                    {item.세션}{" "}
+                    {getSessionInfo(
+                      item.시간,
+                      item.세션.replace("나이트 ", ""),
+                      isWeekend,
+                      format(selectedDate, "yyyy-MM-dd")
+                    )}
                   </td>
-                  <td>{item?.left}</td>
-                  <td>{item?.right}</td>
+                  <td colSpan={item.시간.startsWith("18:00") ? 2 : 1}>
+                    {item.시간.startsWith("18:00") ? item.night : item.left}
+                  </td>
+                  {!item.시간.startsWith("18:00") && <td>{item.right}</td>}
                 </tr>
               ))}
             </tbody>
@@ -127,32 +180,57 @@ export default function ReservationViewer() {
       </main>
 
       <footer className={styles.footer}>
-        <small>
-          ※ 실제 예약은{" "}
-          <a
-            href="https://www.wavepark.co.kr/generalbooking/reserv_main"
-            target="_blank"
-            rel="noreferrer"
-          >
-            공식 사이트
-          </a>
-          에서 해주세요.
-        </small>
+        ※ 실제 예약은{" "}
+        <a
+          href="https://www.wavepark.co.kr/generalbooking"
+          target="_blank"
+          rel="noreferrer"
+        >
+          공식 사이트
+        </a>
+        에서 해주세요.
       </footer>
     </Container>
   );
 }
 
-function getSessionInfo(index: number): string {
-  const sessionInfo = [
-    "(M4,T1)",
-    "(M1e,M2e)",
-    "(M3,M4)",
-    "(M1,M2)",
-    "(M4)",
-    "(M2, M3)",
-    "(T1, T2)",
-    "(M2,M3,M4)",
-  ];
-  return sessionInfo[index] || "";
+const weekendSessionMap: { [key: string]: { [key: string]: string } } = {
+  "2025-06-07": { 중급: "(M3f, M4f)", 초급: "(M3f, M4f)" },
+  "2025-06-08": { 초급: "(M2, M3)", 중급: "(M2, M3)" },
+  "2025-06-14": { 초급: "(M2, M3)", 중급: "(M2, M3)" },
+  "2025-06-15": { 상급: "(T1, T2)", 초급: "(T1, T2)", 중급: "(T1, T2)" },
+  "2025-06-21": { 중급: "(M2, M3, M4)", 초급: "(M2, M3, M4)" },
+  "2025-06-22": { 초급: "(M1, M2)", 중급: "(M1, M2)" },
+  "2025-06-28": { 중급: "(M3, M4L)", 초급: "(M3, M4L)" },
+  "2025-06-29": { 상급: "(M4, T1)", 초급: "(M4, T1)", 중급: "(M4, T1)" },
+};
+
+function getSessionInfo(
+  time: string,
+  session: string,
+  isWeekend: boolean,
+  date: string
+): string {
+  const regularSessionMap: { [key: string]: string } = {
+    "10:00-상급": "(M4, T1)",
+    "11:00-초급": "(M1, M2)",
+    "12:00-중급": "(M3, M4)",
+    "13:00-초급": "(M1, M2)",
+    "14:00-상급": "(M4)",
+    "15:00-초급": "(M2, M3)",
+    "16:00-상급": "(T1, T2)",
+    "17:00-중급": "(M2, M3, M4)",
+  };
+
+  // 주말 세션 (10:00~17:00 및 18:00~22:00)
+  if (isWeekend) {
+    if (session === "알 수 없음" && time.startsWith("18:00")) {
+      // 18:00 세션의 "알 수 없음"은 초급으로 매핑
+      return weekendSessionMap[date]?.["초급"] || "";
+    }
+    return weekendSessionMap[date]?.[session] || "";
+  }
+
+  // 평일 세션 (10:00~17:00)
+  return regularSessionMap[`${time}-${session}`] || "";
 }

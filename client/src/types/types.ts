@@ -33,5 +33,17 @@ export interface ReservationRow {
   courses: Course[];
 }
 
+export interface ReservationItem {
+  시간: string;
+  세션: string;
+  방향: "좌" | "우" | "구분없음";
+  남은좌석: string;
+}
+
+export interface ReservationResponse {
+  date: string;
+  data: ReservationItem[];
+}
+
 // 장연주
 export type WeatherType = "맑음" | "구름많음" | "흐림" | "비" | "눈";
