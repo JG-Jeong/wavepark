@@ -77,12 +77,12 @@ const App: React.FC = () => {
         }
         const apiData: ApiResponse = await response.json();
 
-        // 하드코딩된 날씨와 추천 왁스
+        // 하드코딩된 날씨
         const data: Temperature = {
           temperature: apiData.temperature,
           humidity: apiData.humidity,
           water_temperature: parseFloat(apiData.water_temperature.toFixed(1)),
-          weather: "맑음", // 매일 수동 업데이트
+          weather: "구름많음", // 매일 수동 업데이트
           recommendedWax: getWax(apiData.water_temperature), // water_temperature에 따른 왁스 종류 결정 - 장연주
         };
         setTemperatureData(data);
