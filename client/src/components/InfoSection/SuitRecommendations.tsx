@@ -23,8 +23,8 @@ const SuitRecommendations: React.FC<SuitRecommendationsProps> = ({
         <Card.Title className={styles.tempTitle}>슈트 추천</Card.Title>
         <Table className={styles.cTable}>
           <colgroup>
-            <col style={{ width: "30%" }} />
-            <col style={{ width: "70%" }} />
+            <col style={{ width: "35%" }} />
+            <col style={{ width: "65%" }} />
           </colgroup>
 
           <tbody>

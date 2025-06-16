@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Layout.module.css";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css"; //2025.05.27. 장연주 추가
+import "bootstrap/dist/css/bootstrap.min.css";
 
 //Components
 import ReservationViewer from "./components/LiveReservationTable/LiveReservation";
@@ -38,7 +38,7 @@ const App: React.FC = () => {
     format(new Date(), "yyyy-MM-dd")
   );
 
-  // 수온에 따라 왁스 추천 - 장연주
+  // 수온에 따라 왁스 추천
   const getWax = (waterTemp: number | null): string => {
     if (waterTemp === null) return "-";
     if (waterTemp <= 15) return "COLD";
@@ -83,7 +83,7 @@ const App: React.FC = () => {
           humidity: apiData.humidity,
           water_temperature: parseFloat(apiData.water_temperature.toFixed(1)),
           weather: "비", // 매일 수동 업데이트
-          recommendedWax: getWax(apiData.water_temperature), // water_temperature에 따른 왁스 종류 결정 - 장연주
+          recommendedWax: getWax(apiData.water_temperature), // water_temperature에 따른 왁스 종류 결정
         };
         setTemperatureData(data);
       } catch (err) {
