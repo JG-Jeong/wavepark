@@ -28,7 +28,9 @@ const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
   return (
     <Card className={`mb-3 text-white ${styles.tempCard}`}>
       <Card.Body>
-        <Card.Title className={styles.tempTitle}>{formattedDate}</Card.Title>
+        <Card.Title className={`${styles.tempTitle} ${styles.cText}`}>
+          {formattedDate}
+        </Card.Title>
         <Row className={`text-center mt-1 ${styles.tempContents}`}>
           <Col className="d-flex justify-content-center align-items-center">
             <img className={styles.logoSize} src={tempLogo} />
