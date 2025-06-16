@@ -10,7 +10,7 @@ interface SuitRecommendationsProps {
 const SuitRecommendations: React.FC<SuitRecommendationsProps> = ({
   recommendations,
 }) => {
-  /* 2025.05.27 장연주 추가 */
+  /* 2025.05.27 YJ 추가 */
   const conditionColors = {
     출격: "#033E8C",
     불허: "#D90404",

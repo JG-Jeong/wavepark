@@ -17,36 +17,6 @@ const formattedDate = `${String(today.getMonth() + 1).padStart(
 )}/${String(today.getDate()).padStart(2, "0")}`;
 
 const TemperatureInfo: React.FC<TemperatureInfoProps> = ({ data }) => {
-  /* 날씨에 따라 데이터를 넣고 이모지도 넣는 함수 - 날씨 맞춤 이미지로 변경경 - 장연주
-  const getWeatherImage = (weather: string): string => {
-    const weatherLower = weather?.toLowerCase();
-
-    const imageMap: Record<WeatherType | string, string> = {
-      맑음: '../../styles/sunny.png',
-      구름많음: '../../styles/suncloudy.png',
-      흐림: "../../styles/overcast_cloud.png",
-      비: '../../styles/heavy_rain.png',
-      눈: '../../styles/snow_cloud.png'
-    };
-    return imageMap[weatherLower] ?? sunnyImg;
-  };*/
-
-  // 날씨에 따라 왁스 추천 - 사용 안함 - 장연주
-  const getWaxEmoji = (wax: string) => {
-    switch (wax) {
-      case "COOL":
-        return "❄️";
-      case "COLD":
-        return "🥶";
-      case "WARM":
-        return "🌡️";
-      case "TROPIC":
-        return "🔥";
-      default:
-        return "";
-    }
-  };
-
   //null check: API 수신 전 null인 경우 '-'로 표기
   const getDisplayValue = (
     value: number | string | null | undefined,
