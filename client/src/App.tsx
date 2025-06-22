@@ -82,7 +82,7 @@ const App: React.FC = () => {
           temperature: apiData.temperature,
           humidity: apiData.humidity,
           water_temperature: parseFloat(apiData.water_temperature.toFixed(1)),
-          weather: "흐림", // 매일 수동 업데이트 // 맑음 구름많음 흐림 비 눈
+          weather: "맑음", // 매일 수동 업데이트 // 맑음 구름많음 흐림 비 눈
           recommendedWax: getWax(apiData.water_temperature), // water_temperature에 따른 왁스 종류 결정
         };
         setTemperatureData(data);
