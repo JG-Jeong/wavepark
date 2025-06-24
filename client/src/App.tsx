@@ -82,7 +82,7 @@ const App: React.FC = () => {
           temperature: apiData.temperature,
           humidity: apiData.humidity,
           water_temperature: parseFloat(apiData.water_temperature.toFixed(1)),
-          weather: "맑음", // 매일 수동 업데이트 // 맑음 구름많음 흐림 비 눈
+          weather: "비", // 매일 수동 업데이트 // 맑음 구름많음 흐림 비 눈
           recommendedWax: getWax(apiData.water_temperature), // water_temperature에 따른 왁스 종류 결정
         };
         setTemperatureData(data);
@@ -102,7 +102,7 @@ const App: React.FC = () => {
     { suitType: "보드숏", condition: "출격" },
     { suitType: "스프링", condition: "출격" },
     { suitType: "3/2", condition: "출격" },
-    { suitType: "3/2기모", condition: "춥찔이" },
+    { suitType: "3/2기모", condition: "출격" },
     { suitType: "4/3", condition: "불허" },
     { suitType: "5mm", condition: "불허" },
   ];
