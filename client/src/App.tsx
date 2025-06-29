@@ -15,6 +15,7 @@ import {
   ReservationItem,
 } from "./types/types";
 import { format } from "date-fns";
+import { fetchWeatherData } from "./api/weatherAPI";
 
 interface ApiResponse {
   temperature: number;
@@ -77,12 +78,15 @@ const App: React.FC = () => {
         }
         const apiData: ApiResponse = await response.json();
 
+        //날씨 API 호출
+        const weather = await fetchWeatherData();
+
         // 하드코딩된 날씨
         const data: Temperature = {
           temperature: apiData.temperature,
           humidity: apiData.humidity,
           water_temperature: parseFloat(apiData.water_temperature.toFixed(1)),
-          weather: "구름많음", // 매일 수동 업데이트 // 맑음 구름많음 흐림 비 눈
+          weather: weather, // 매일 수동 업데이트 // 맑음 구름많음 흐림 비 눈
           recommendedWax: getWax(apiData.water_temperature), // water_temperature에 따른 왁스 종류 결정
         };
         setTemperatureData(data);
@@ -102,7 +106,7 @@ const App: React.FC = () => {
     { suitType: "보드숏", condition: "출격" },
     { suitType: "스프링", condition: "출격" },
     { suitType: "3/2", condition: "출격" },
-    { suitType: "3/2기모", condition: "출격" },
+    { suitType: "3/2기모", condition: "불허" },
     { suitType: "4/3", condition: "불허" },
     { suitType: "5mm", condition: "불허" },
   ];
