@@ -189,25 +189,27 @@ const App: React.FC = () => {
   return (
     <div>
       <Header />
-      <Tab activeTab={activeTab} onTabChange={setActiveTab} />
+      {/* <Tab activeTab={activeTab} onTabChange={setActiveTab} /> */}
       <div className={styles.layout}>
-        {activeTab === "today" ? (
-          <div className={styles.contentContainer}>
-            <InfoSection
-              temperature={temperatureData}
-              recommendations={recommendations}
-              schedule={schedule}
-            />
-          </div>
-        ) : activeTab === "reservation" ? (
-          <ReservationViewer
-            initialData={reservationData}
-            initialDate={reservationDate}
-            updateData={updateReservationData}
+        {/* {activeTab === "today" ? ( */}
+        <div className={styles.contentContainer}>
+          <InfoSection
+            temperature={temperatureData}
+            recommendations={recommendations}
+            schedule={schedule}
           />
-        ) : (
-          <Calendar />
-        )}
+        </div>
+        {/* )  */}
+        {/*         
+         : activeTab === "reservation" ? (
+           <ReservationViewer
+             initialData={reservationData}
+             initialDate={reservationDate}
+             updateData={updateReservationData}
+           />
+         ) : (
+           <Calendar />
+         )} */}
       </div>
     </div>
   );
